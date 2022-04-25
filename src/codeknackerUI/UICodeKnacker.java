@@ -5,10 +5,10 @@ import codeknacker.TCPStream;
 import java.io.*;
 
 public class UICodeKnacker {
-    private static final String CONNECT = "a";
-    private static final String START = "b";
-    private static final String HISTORY = "c";
-    private static final String EXIT = "d";
+    private static final String CONNECT = "c";
+    private static final String START = "s";
+    private static final String HISTORY = "h";
+    private static final String EXIT = "e";
     private final PrintStream outStream;
     private final BufferedReader inBufferedReader;
     private final String playerName;
@@ -140,21 +140,22 @@ public class UICodeKnacker {
     }
 
     private void doExit() throws IOException {
-        System.out.println("It's caming soon.");
+        System.out.println("It's coming soon.");
         printUsage();
         runCommandLoop();
         // shutdown engines which needs to be
         //this.protocolEngine.close();
     }
 
-    private void openHistory(){
-        System.out.println("It's caming soon.");
+    private void openHistory() {
+        //Mit Streams die Daten auf einer txt-Datei einlesen
+        System.out.println("It's coming soon.");
         printUsage();
         runCommandLoop();
     }
 
     private void doConnect(String parameterString) {
-        System.out.println("It's caming soon.");
+        System.out.println("It's coming soon.");
         printUsage();
         runCommandLoop();
         /*if (this.alreadyConnected()) return;
@@ -178,20 +179,8 @@ public class UICodeKnacker {
     }
 
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                                                                                          //
-    //                                     Ab hier nicht mehr Teil der UI                                       //
-    //                                                                                                          //
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public static void createUnderline(int lSpielername) {
-        System.out.println();
-        for (int i = 0; i < lSpielername; i++) {
-            System.out.print("`");
-        }
-    }
-
-    public void createTheUpperPartOfTheGameFrame(){
-        System.out.println("It's caming soon.");
+    public void createTheUpperPartOfTheGameFrame() {
+        System.out.println("It's coming soon.");
         printUsage();
         runCommandLoop();
         String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
@@ -207,40 +196,11 @@ public class UICodeKnacker {
         System.out.println();
         System.out.print("Dein Tipp für die 1. Zahl lautet?");
         System.out.println();
+
         System.out.print("1. Tipp: -Usereingabe-");
         System.out.println();
         System.out.println();
          */
     }
 
-    public static void createTheUpperPartOfTheGameFrameEnd() {
-        String upperPartOfTheGameFrameEnd = "############################### CodeKnacker - Spielende ###############################";
-        int laenge = upperPartOfTheGameFrameEnd.length();
-        System.out.print(upperPartOfTheGameFrameEnd);
-        System.out.println();
-        System.out.println();
-        System.out.print("Der gesuchte Zahlencode lautet: [X, Y, Z]");
-        System.out.println();
-        System.out.print("Das Spiel ist unentschieden ausgegangen.");
-        //System.out.print("Gewonnen/Verloren hat: Spieler1/ Spieler2");
-        System.out.println();
-        System.out.println();
-        //createTheDownPartOfTheGameFrame(laenge);
-    }
-
-    //public static void createTheDownPartOfTheGameFrame(int zeichenlaenge) {
-
-        //funktionen(
-                //Hier werden die Ergebnisse durch weitere Funktionen dargestellt
-                //1. Die gesuchte Zahlenkombination in der Form Zahlencode: [x, y, z]
-                //2. Sieger/Verlierer/ Unentschieden
-                //   - Sieger in Form -> Gewonnen hat: Spielername1/Spielername2
-                //   - Verloren in Form -> Verloren hat: Spielername2/Spielername1
-                //   - Das Spiel ist unentschieden ausgegangen
-       // );
-
-        //for (int i = 0; i<zeichenlaenge; i++){
-          //  System.out.print("#");
-        //}
-    //
 }
