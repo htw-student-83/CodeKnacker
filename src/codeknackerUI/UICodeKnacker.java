@@ -6,6 +6,7 @@ import java.io.*;
 
 public class UICodeKnacker {
     private static final String CONNECT = "c";
+    private static final String RulesOfTheGame = "r";
     private static final String START = "s";
     private static final String HISTORY = "h";
     private static final String EXIT = "e";
@@ -60,17 +61,20 @@ public class UICodeKnacker {
         b.append("\n");
         b.append("Please choose one of the following points:");
         b.append("\n");
+        b.append(RulesOfTheGame);
+        b.append("...to get the rules of the game");
+        b.append("\n");
         b.append(CONNECT);
-        b.append("..to get in contact with an other player");
+        b.append("...to get in contact with an other player");
         b.append("\n");
         b.append(START);
-        b.append("..let's start the game");
+        b.append("...let's start the game");
         b.append("\n");
         b.append(HISTORY);
-        b.append("..history of the last winner");
+        b.append("...history of the last winner");
         b.append("\n");
         b.append(EXIT);
-        b.append("..stop the program");
+        b.append("...stop the program");
         b.append("\n");
 
         this.outStream.println(b.toString());
@@ -109,6 +113,9 @@ public class UICodeKnacker {
                     case CONNECT:
                         this.doConnect(parameterString);
                         break;
+                    case RulesOfTheGame:
+                        this.getRules();
+                        break;
                     case START:
                         this.createTheUpperPartOfTheGameFrame();
                         break;
@@ -139,10 +146,20 @@ public class UICodeKnacker {
         }
     }
 
-    private void doExit() throws IOException {
-        System.out.println("It's coming soon.");
+    private void getRules() {
+        System.out.println("//Rules:");
+        System.out.println("//Allow are only numbers at intervall [0;10]");
+        System.out.println("//two points for a right input number");
+        System.out.println("//not points for a mistake input number");
+        System.out.println("//if the input number is wrong the user will get a feedback");
+        System.out.println("//after every input the next player is turn");
+        System.out.println("//every player has 2-3attempts to guess the right number");
         printUsage();
         runCommandLoop();
+    }
+
+    private void doExit() throws IOException {
+        System.exit(0);
         // shutdown engines which needs to be
         //this.protocolEngine.close();
     }
@@ -180,10 +197,15 @@ public class UICodeKnacker {
 
 
     public void createTheUpperPartOfTheGameFrame() {
-        System.out.println("It's coming soon.");
+        String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
+        System.out.println("##################################### CodeKnacker #####################################");
+        System.out.println("Vorgeschichte:");
+        System.out.println("Vor Jahren hat sich Alice einen Safe zugelegt, um ihre Wertsachen in Sicherheit zu wissen.");
+        System.out.println("Leider hat sie ihren Code vergessen-(");
+        System.out.println("Damit der Code nicht in falsche Hände gerät, überlegte sich Alice einst sich diese Zahlenkombination nicht zu notieren *oh*.");
+        System.out.println("Da sie im Raten von Zahlen auch nicht besonders erfolgreich ist, braucht sie dringend eure Hilfe.");
         printUsage();
         runCommandLoop();
-        String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
         /*
         String spieler = "Spieler1 ist dran.";
         int laengeSpielername  = spieler.length();
@@ -202,5 +224,4 @@ public class UICodeKnacker {
         System.out.println();
          */
     }
-
 }
