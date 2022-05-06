@@ -1,7 +1,7 @@
 package codeknacker;
 
 /**
- * Methods are active if the player input an invalid Sting
+ * Methods are active if the player input an invalid number
  */
 public class GameException extends Exception{
     public GameException() { super(); }

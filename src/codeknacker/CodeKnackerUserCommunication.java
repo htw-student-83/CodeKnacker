@@ -56,4 +56,6 @@ public interface CodeKnackerUserCommunication {
      * @throws
      */
     void askForAsecondRound() throws IOException;
+
+    String yourHint2() throws IllegalArgumentException;
 }
