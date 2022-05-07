@@ -1,32 +1,35 @@
 package codeknackerTest;
 
+import codeknacker.ICodeKnackerDrawFrame;
 import codeknacker.CodeKnackerDrawFrame;
-import codeknacker.CodeKnackerDrawFrameC;
 import codeknacker.StatusException;
 import org.junit.Assert;
-
+import org.junit.Test;
 import java.io.IOException;
 
 public class CodeKnackerGameFrameTest {
 
-    private CodeKnackerDrawFrame object() {
-        return new CodeKnackerDrawFrameC();
+    private ICodeKnackerDrawFrame object() {
+        return new CodeKnackerDrawFrame();
     }
 
+    @Test
     public void creationUpperFrameStart() throws StatusException {
-        CodeKnackerDrawFrame frameUp = this.object();
+        ICodeKnackerDrawFrame frameUp = this.object();
         String frame = frameUp.createTheUpperGameFrameStart();
         Assert.assertEquals("##################################### CodeKnacker #####################################",frame);
     }
 
+    @Test
     public void creationUpperFrameEnd() throws StatusException, IOException {
-        CodeKnackerDrawFrame frameUp = this.object();
+        ICodeKnackerDrawFrame frameUp = this.object();
         String frame = frameUp.createTheUpperGameFrameEnd();
         Assert.assertEquals("############################### CodeKnacker - Spielende ###############################",frame);
     }
 
+    @Test
     public void creationUpperFrameDown() throws StatusException, IOException {
-        CodeKnackerDrawFrame frameUp = this.object();
+        ICodeKnackerDrawFrame frameUp = this.object();
         String frame = frameUp.createTheDownGameFrameEnd();
         Assert.assertEquals("#######################################################################################",frame);
     }

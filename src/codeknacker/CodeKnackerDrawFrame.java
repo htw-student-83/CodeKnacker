@@ -2,32 +2,25 @@ package codeknacker;
 
 import java.io.IOException;
 
-public interface CodeKnackerDrawFrame {
+public class CodeKnackerDrawFrame implements ICodeKnackerDrawFrame {
 
-    /**
-     * create the upper frame of the game.
-     * @throws StatusException, if the connection between two computer is failed
-     */
-    String createTheUpperGameFrameStart() throws StatusException;
+    @Override
+    public String createTheUpperGameFrameStart() throws StatusException {
+        return "";
+    }
 
+    @Override
+    public String createTheUpperGameFrameEnd() throws IOException {
+        return "";
+    }
 
-    /**
-     * create the upper frame of the gaame, if a game round is finished.
-     * @throws IOException
-     */
-    String createTheUpperGameFrameEnd() throws IOException;
+    @Override
+    public String createTheDownGameFrameEnd() throws IOException {
+        return "";
+    }
 
-
-    /**
-     * create the down frame of the gaame, if a game round is finished.
-     * @throws IOException
-     */
-    String createTheDownGameFrameEnd() throws IOException;
-
-
-    /**
-     * create the underline for a playername.
-     * @throws StatusException
-     */
-    String createANUnderlineForPlayerName() throws StatusException;
+    @Override
+    public String createANUnderlineForPlayerName() throws StatusException {
+        return "";
+    }
 }

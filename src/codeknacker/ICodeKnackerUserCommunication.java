@@ -2,7 +2,7 @@ package codeknacker;
 
 import java.io.IOException;
 
-public interface CodeKnackerUserCommunication {
+public interface ICodeKnackerUserCommunication {
 //API for the communication with the player
 
     /**

@@ -9,14 +9,14 @@ import java.io.InputStream;
 public class CodeKnackerUserInputTest {
     //1. Test prüft, ob ein String eingegeben wurde
 
-    private CodeKnackerUserCommunication object() {
+    private ICodeKnackerUserCommunication object() {
         return new CodeKnackerUserCom();
     }
 
 
     @Test
     public void checkInput(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String begriff = "test1";
         InputStream is = new ByteArrayInputStream(begriff.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen werden
@@ -27,7 +27,7 @@ public class CodeKnackerUserInputTest {
 
     @Test
     public void checkInputsNumber(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String validNumber = "0";
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird
@@ -37,7 +37,7 @@ public class CodeKnackerUserInputTest {
 
     @Test
     public void checkInputsNumber2(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String validNumber = "1";
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird
@@ -47,7 +47,7 @@ public class CodeKnackerUserInputTest {
 
     @Test
     public void checkInputsNumber3(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String validNumber = "2";
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird
@@ -58,7 +58,7 @@ public class CodeKnackerUserInputTest {
 
     @Test
     public void checkInputsNumber4(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String validNumber = "3";
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird
@@ -69,7 +69,7 @@ public class CodeKnackerUserInputTest {
 
     @Test
     public void checkInputsNumber5(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String validNumber = "4";
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird
@@ -80,7 +80,7 @@ public class CodeKnackerUserInputTest {
 
     @Test
     public void checkInputsNumber6(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String validNumber = "5";
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird
@@ -90,7 +90,7 @@ public class CodeKnackerUserInputTest {
 
     @Test
     public void checkInputsNumber7(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String validNumber = "6";
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird
@@ -101,7 +101,7 @@ public class CodeKnackerUserInputTest {
 
     @Test
     public void checkInputsNumber8(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String validNumber = "7";
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird
@@ -112,7 +112,7 @@ public class CodeKnackerUserInputTest {
 
     @Test
     public void checkInputsNumber9(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String validNumber = "8";
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird
@@ -123,7 +123,7 @@ public class CodeKnackerUserInputTest {
 
     @Test
     public void checkInputsNumber10(){
-        CodeKnackerUserCommunication userinput = this.object();
+        ICodeKnackerUserCommunication userinput = this.object();
         String validNumber = "9";
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird

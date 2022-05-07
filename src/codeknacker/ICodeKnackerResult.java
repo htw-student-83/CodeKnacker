@@ -2,7 +2,7 @@ package codeknacker;
 
 import java.io.IOException;
 
-public interface CodeKnackerResult {
+public interface ICodeKnackerResult {
 
     /**
      * to get the name' winner of the current game round

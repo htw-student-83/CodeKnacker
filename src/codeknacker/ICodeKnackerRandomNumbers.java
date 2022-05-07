@@ -1,6 +1,6 @@
 package codeknacker;
 
-public interface CodeKnackerRandomNumbers {
+public interface ICodeKnackerRandomNumbers {
 
     /**
      * create three random numbers between 0 and 10.

@@ -1,6 +1,6 @@
 package codeknacker;
 
-public class CodeKnackerRandomNumber implements CodeKnackerRandomNumbers {
+public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
     @Override
     public int createRandomNumbers() throws StatusException {
         return 0;

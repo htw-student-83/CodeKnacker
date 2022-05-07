@@ -3,7 +3,7 @@ package codeknacker;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class CodeKnackerUserCom implements CodeKnackerUserCommunication {
+public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     @Override
     public void inputNumberIsTooSmall(int zahleneingabe) throws IOException {
 

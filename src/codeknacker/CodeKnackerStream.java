@@ -3,7 +3,7 @@ package codeknacker;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class CodeKnackerStreamC implements CodeKnackerStreamsTheResult {
+public class CodeKnackerStream implements ICodeKnackerStreamsTheResult {
     //the name of the file is coming soon.
     private final String filename = "abc";
 

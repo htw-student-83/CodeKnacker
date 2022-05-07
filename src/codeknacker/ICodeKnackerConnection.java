@@ -3,7 +3,7 @@ package codeknacker;
 import java.net.ConnectException;
 import java.nio.channels.ClosedChannelException;
 
-public interface CodeKnackerConnection {
+public interface ICodeKnackerConnection {
 
     /**
      * to connect with a second player for the game.

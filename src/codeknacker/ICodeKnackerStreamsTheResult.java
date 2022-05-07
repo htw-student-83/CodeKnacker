@@ -3,7 +3,7 @@ package codeknacker;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public interface CodeKnackerStreamsTheResult {
+public interface ICodeKnackerStreamsTheResult {
 
     /**
      * to read the result of the last game round from a file

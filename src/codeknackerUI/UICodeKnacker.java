@@ -71,7 +71,7 @@ public class UICodeKnacker {
         b.append("...let's start the game");
         b.append("\n");
         b.append(HISTORY);
-        b.append("...history of the last winner");
+        b.append("...history of the last game result");
         b.append("\n");
         b.append(EXIT);
         b.append("...stop the program");
@@ -164,7 +164,7 @@ public class UICodeKnacker {
     }
 
     private void openHistory() {
-        //Mit Streams die Daten auf einer txt-Datei einlesen
+        //Mit Streams die Daten aus einer txt-Datei auslesen
         System.out.println("It's coming soon.");
         printUsage();
         runCommandLoop();
