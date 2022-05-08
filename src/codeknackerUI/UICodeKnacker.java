@@ -149,7 +149,7 @@ public class UICodeKnacker {
     private void getRules() {
         System.out.println("//Rules:");
         System.out.println("//Allow are only numbers at intervall [0;9]");
-        System.out.println("//two points for a right input number");
+        System.out.println("//one point for a right input number");
         System.out.println("//if the input number is wrong the user will get a feedback");
         System.out.println("//after every input the next player is turn");
         System.out.println("//every player has 2-3attempts to guess the right of three numbers");

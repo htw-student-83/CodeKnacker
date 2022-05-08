@@ -7,13 +7,12 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 public class CodeKnackerUserInputTest {
-    //1. Test prüft, ob ein String eingegeben wurde
 
     private ICodeKnackerUserCommunication object() {
         return new CodeKnackerUserCom();
     }
 
-
+    //1. Test prüft, ob ein String eingegeben wurde
     @Test
     public void checkInput(){
         ICodeKnackerUserCommunication userinput = this.object();

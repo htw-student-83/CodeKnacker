@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     @Override
+    public boolean deliveryHint(String playerName, int hint) throws IllegalArgumentException {
+        return false;
+    }
+
+    @Override
     public void inputNumberIsTooSmall(int zahleneingabe) throws IOException {
 
     }
