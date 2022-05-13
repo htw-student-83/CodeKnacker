@@ -1,18 +1,17 @@
-package codeknacker;
+package codeknackerUI;
 
 import java.io.IOException;
 
 public interface ICodeKnackerUserCommunication {
-//API for the communication with the player
+//Infertace for the  User-communication
 
     /**
      * to deliver a hint
-     * @param playerName
-     * @param hint
-     * @return true, if the arguments are valid
-     * @throws IllegalArgumentException
+     * @param playerName the name of the player
+     * @param hint, the player's number
+     * @throws IllegalArgumentException, if the player's input is invalid
      */
-    boolean deliveryHint(String playerName, int hint) throws IllegalArgumentException;
+    void deliveryHint(String playerName, int hint) throws IllegalArgumentException;
 
 
     /**
@@ -25,7 +24,7 @@ public interface ICodeKnackerUserCommunication {
 
     /**
      * to get the message that the input is bigger than the to find random number.
-     * @param zahleneingabe
+     * @param zahleneingabe, the inputNumber of a player
      * @throws IOException, if, something else is wrong
      */
     void inputNumberIsTooBig(int zahleneingabe) throws IOException;
@@ -33,7 +32,7 @@ public interface ICodeKnackerUserCommunication {
 
     /**
      * to get the message that the one of three random numbers was found.
-     * @param zahleneingabe
+     * @param zahleneingabe, the inputNumber of a player
      * @throws IOException, if, something else is wrong
      */
     void foundArandomNumber(int zahleneingabe) throws IOException;
@@ -71,7 +70,7 @@ public interface ICodeKnackerUserCommunication {
     /**
      * using for testszenarien
      * @return the users hint as a Integer number
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException, if the player's input is invalids
      */
     String yourHint2() throws IllegalArgumentException;
 }

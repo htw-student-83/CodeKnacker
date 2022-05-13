@@ -3,10 +3,10 @@ package codeknacker;
 public interface ICodeKnackerRandomNumbers {
 
     /**
-     * create three random numbers between 0 and 10.
+     * create three random numbers between 0 and 9.
      * @throws StatusException
      */
-    int createRandomNumbers() throws StatusException;
+    void createThreeRandomNumbers() throws StatusException;
 
 
     /**
@@ -21,5 +21,13 @@ public interface ICodeKnackerRandomNumbers {
      * @return true, if that the case or not
      * @throws StatusException, if the process connection is failed.
      */
-    boolean isAduplicateInTheArray(int [] ramdomNumbers) throws StatusException;
+    boolean isAduplicateInTheArray(int[] ramdomNumbers) throws StatusException;
+
+
+    /**
+     * create seperate random number.
+     *
+     * @return a randomNumber in the intervall
+     */
+    int creationRandomNumber();
 }

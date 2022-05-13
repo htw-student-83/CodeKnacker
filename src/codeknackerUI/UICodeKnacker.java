@@ -1,6 +1,7 @@
 package codeknackerUI;
 
 import codeknacker.CodeKnackerTCPProtocolEngine;
+import codeknacker.ICodeKnackerCheckUserNumber;
 import codeknacker.TCPStream;
 import java.io.*;
 

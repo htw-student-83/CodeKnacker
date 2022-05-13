@@ -1,11 +1,11 @@
 package codeknackerTest;
 
 import codeknacker.*;
+import codeknackerUI.ICodeKnackerUserCommunication;
 import org.junit.Assert;
 import org.junit.Test;
-import java.io.ByteArrayInputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
 
 public class CodeKnackerStreamTest {
     public static final String ALICE = "Alice";
@@ -56,7 +56,6 @@ public class CodeKnackerStreamTest {
         ICodeKnackerPunkte punkte = this.object5();
         ICodeKnackerResult result = this.object4();
         //herer to simulate a game round with an winner at the end
-        ICodeKnackerRandomNumbers randomNumbrs = this.object3();
         //to put a final code for the simulation
         int [] code = {4,5,6};
 
@@ -100,7 +99,6 @@ public class CodeKnackerStreamTest {
         ICodeKnackerUserCommunication userinput = this.object2();
         ICodeKnackerPunkte punkte = this.object5();
         ICodeKnackerResult result = this.object4();
-        //ICodeKnackerRandomNumbers randomNumbrs = this.object3();
         //to put a final code for the first simulation
         int [] code = {4,5,6};
         //Zahl X
@@ -114,7 +112,7 @@ public class CodeKnackerStreamTest {
         userinput.deliveryHint(BOB, 3);
         userinput.inputNumberIsTooSmall(3);
         userinput.deliveryHint(ALICE, 7);
-        userinput.inputNumberIsTooBig(code[1]);
+        userinput.inputNumberIsTooBig(7);
         userinput.deliveryHint(BOB, 5);
         userinput.foundArandomNumber(5);
         punkte.setPunktePlayer2();
@@ -173,5 +171,27 @@ public class CodeKnackerStreamTest {
         stream.saveGameResult(resultRemi);
         String savedResult = stream.restoreGameResult();
         Assert.assertEquals("Unentschieden", savedResult);
+    }
+
+    @Test(expected = StatusException.class)
+    public void aGameRoundWithAStatusFaild() throws IOException {
+        ICodeKnackerUserCommunication userinput = this.object2();
+        int[] code = {4, 5, 6};
+        //Zahl X
+        userinput.deliveryHint(ALICE, 1);
+        userinput.inputNumberIsTooSmall(1);
+        userinput.deliveryHint(BOB, 2);
+        userinput.inputNumberIsTooSmall(2);
+        userinput.deliveryHint(BOB, 3);
+    }
+
+    @Test(expected = StatusException.class)
+    public void aGameRoundWithAStatusFaild2() throws IOException {
+        ICodeKnackerUserCommunication userinput = this.object2();
+        int[] code = {4, 5, 6};
+        //Zahl X
+        userinput.deliveryHint(ALICE, 1);
+        userinput.inputNumberIsTooSmall(1);
+        userinput.deliveryHint(ALICE, 3);
     }
 }

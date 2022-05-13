@@ -17,7 +17,7 @@ public class CodeKnackerRandomNumberTest {
     @Test
     public void firstRandomNumberAtIntervall () throws StatusException {
         ICodeKnackerRandomNumbers randomNumber = this.object();
-        int randomNumberOne = randomNumber.createRandomNumbers();
+        int randomNumberOne = randomNumber.creationRandomNumber();
         Assert.assertTrue(randomNumberOne>=0);
         Assert.assertTrue(randomNumberOne<10);
     }
@@ -29,7 +29,7 @@ public class CodeKnackerRandomNumberTest {
         final int MAXSIZEOFLIST = 3;
         List<Integer> randomNumberList = new ArrayList<>();
         for (int i = 0; i<MAXSIZEOFLIST; i++){
-            randomNumberList.add(randomNumber.createRandomNumbers());
+            randomNumberList.add(randomNumber.creationRandomNumber());
         }
         Assert.assertEquals(3, randomNumberList.size());
     }
