@@ -1,4 +1,4 @@
-package codeknacker;
+package codeknackerUI;
 
 import codeknackerUI.ICodeKnackerUserCommunication;
 
@@ -13,20 +13,24 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
 
     @Override
     public void inputNumberIsTooSmall(int zahleneingabe) throws IOException {
+        /*
         CodeKnackerRandomNumber codeArra = new CodeKnackerRandomNumber();
-        int firstNumber = codeArra.getFinalElement();
+        int firstNumber = codeArra.getFinalElement(2);
         if(zahleneingabe<firstNumber){
             System.out.println("Unfornately, your input is too small.");
         }
+         */
     }
 
     @Override
     public void inputNumberIsTooBig(int zahleneingabe) throws IOException {
+        /*
         CodeKnackerRandomNumber codeArra = new CodeKnackerRandomNumber();
-        int firstNumber = codeArra.getFinalElement();
+        int firstNumber = codeArra.getFinalElement(1);
         if(zahleneingabe>firstNumber){
             System.out.println("Unfornately, your input is too big.");
         }
+         */
     }
 
     @Override
@@ -51,9 +55,11 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
 
     @Override
     public void howIsYourNumberTip() throws IOException {
+        /*
         if(numberOfInputs()<=2) {
             System.out.println("How is your next number?");
         }
+         */
     }
 
     @Override

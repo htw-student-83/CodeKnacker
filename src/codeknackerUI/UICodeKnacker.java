@@ -1,8 +1,7 @@
 package codeknackerUI;
 
-import codeknacker.CodeKnackerTCPProtocolEngine;
-import codeknacker.ICodeKnackerCheckUserNumber;
-import codeknacker.TCPStream;
+import codeknackerNetwork.CodeKnackerTCPProtocolEngine;
+import codeknackerNetwork.TCPStream;
 import java.io.*;
 
 public class UICodeKnacker {
@@ -37,8 +36,8 @@ public class UICodeKnacker {
         userCmd.printUsage();
         userCmd.runCommandLoop();
 
-        //to start the game when the rule is succuesful
-        if (true) {
+        //to start the game, if two systems are connected
+        if(true) {
             //Wenn 2 Spieler feststehen
             //createTheUpperPartOfTheGameFrame();
         } else {
@@ -63,7 +62,7 @@ public class UICodeKnacker {
         b.append("Please choose one of the following points:");
         b.append("\n");
         b.append(RulesOfTheGame);
-        b.append("...to get the rules of the game");
+        b.append("...to get the game' rules");
         b.append("\n");
         b.append(CONNECT);
         b.append("...to get in contact with an other player");

@@ -1,4 +1,7 @@
-package codeknacker;
+package codeknackerUI;
+
+import codeknacker.ICodeKnackerDrawFrame;
+import codeknacker.StatusException;
 
 import java.io.IOException;
 

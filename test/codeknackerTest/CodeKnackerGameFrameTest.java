@@ -1,7 +1,7 @@
 package codeknackerTest;
 
 import codeknacker.ICodeKnackerDrawFrame;
-import codeknacker.CodeKnackerDrawFrame;
+import codeknackerUI.CodeKnackerDrawFrame;
 import codeknacker.StatusException;
 import org.junit.Assert;
 import org.junit.Test;

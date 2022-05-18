@@ -1,25 +1,39 @@
 package codeknacker;
 
 public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
-    int[] finalCode = new int[3];
+    public int[] code = new int[3];
 
     @Override
-    public void createThreeRandomNumbers() throws StatusException {
-        int randomNumberOne = creationRandomNumber();
-        int randomNumberTwo = creationRandomNumber();
-        int randomNumberThree = creationRandomNumber();
+    public void createThreeUniqueRandomNumbers() throws StatusException {
+        /*
+        int randomNumberOne, randomNumberTwo, randomNumberThree;
+        //Die Schleife wird solange durchlaufen bis jede Zufallszahl einmalig ist
+        do{
+            randomNumberOne = creationRandomNumber();
+            randomNumberTwo = creationRandomNumber();
+            randomNumberThree = creationRandomNumber();
+        }while(randomNumberOne==randomNumberTwo||randomNumberOne==randomNumberThree||randomNumberTwo==randomNumberThree);
+
         setRandomNumbersInArray(randomNumberOne, randomNumberTwo, randomNumberThree);
+
+         */
     }
 
+    //Diese Methode kann auf private umgestellt werden
     @Override
     public void setRandomNumbersInArray(int randomNumberOne, int randomNumberTwo, int randomNumberThree) throws StatusException {
-        int[] code = {randomNumberOne, randomNumberTwo, randomNumberThree};
+        /*
+        int[] randomNumberArray = {randomNumberOne, randomNumberTwo, randomNumberThree};
+        setFinalCode(randomNumberArray);
         //Recherchieren, ob die Übergabe korrekt ist!
-        if(!isAduplicateInTheArray(code)){
-           setFinalCode(code);
-        }
+        //if(!isAduplicateInTheArray(code)){
+        //
+        //}
+
+         */
     }
 
+    /*
     @Override
     public boolean isAduplicateInTheArray(int [] ramdomNumbers) throws StatusException {
         for(int i = 0; i<ramdomNumbers.length; i++){
@@ -30,23 +44,33 @@ public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
         }
         return true;
     }
+    */
 
-    public void setFinalCode(int[] code){
-        for(int i = 0; i<code.length; i++){
-            finalCode[i] = code[i];
+    public void setFinalCode(int[] randomNumberArray){
+        /*
+        for(int i = 0; i<randomNumberArray.length; i++){
+            this.code[i] = randomNumberArray[i];
         }
+
+         */
     }
 
-    public int getFinalElement(){
-        for(int number : finalCode){
-            return number;
-        }
-        return -1;
+    public int getFinalElement(int index){
+        return 0;
+        /*
+
+         this.code[index];
+
+         */
     }
 
     public int creationRandomNumber(){
+        /*
         //Das Intervall [0;9] muss noch festgelegt werden!
         int randomNumber = (int) Math.round(Math.random());
-        return randomNumber;
+         randomNumber;
+
+         */
+        return 0;
     }
 }

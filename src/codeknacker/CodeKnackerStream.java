@@ -8,6 +8,7 @@ public class CodeKnackerStream implements ICodeKnackerStreamsTheResult {
     @Override
     public String restoreGameResult() throws IOException {
         InputStream is = null;
+        String result = "";
         try {
             is = new FileInputStream(filename);
         }catch (FileNotFoundException e){
@@ -16,14 +17,13 @@ public class CodeKnackerStream implements ICodeKnackerStreamsTheResult {
         }
         DataInputStream dais = new DataInputStream(is);
         try {
-            String result = dais.readUTF();
-            return result;
+            result = dais.readUTF();
         }catch (IOException ex) {
             System.err.println("Something was wrong." + ex.getMessage());
             System.exit(0);
         }
         dais.close();
-        return "-1";
+        return result;
     }
 
     @Override

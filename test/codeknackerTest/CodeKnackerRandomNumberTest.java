@@ -19,7 +19,7 @@ public class CodeKnackerRandomNumberTest {
         ICodeKnackerRandomNumbers randomNumber = this.object();
         int randomNumberOne = randomNumber.creationRandomNumber();
         Assert.assertTrue(randomNumberOne>=0);
-        Assert.assertTrue(randomNumberOne<10);
+        Assert.assertTrue(randomNumberOne<=9);
     }
 
 

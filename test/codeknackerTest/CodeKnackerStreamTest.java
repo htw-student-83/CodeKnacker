@@ -1,6 +1,7 @@
 package codeknackerTest;
 
 import codeknacker.*;
+import codeknackerUI.CodeKnackerUserCom;
 import codeknackerUI.ICodeKnackerUserCommunication;
 import org.junit.Assert;
 import org.junit.Test;

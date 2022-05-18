@@ -1,4 +1,4 @@
-package codeknacker;
+package codeknackerNetwork;
 
 import java.net.ConnectException;
 import java.nio.channels.ClosedChannelException;
