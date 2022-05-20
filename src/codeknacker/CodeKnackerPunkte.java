@@ -6,21 +6,21 @@ public class CodeKnackerPunkte implements ICodeKnackerPunkte {
 
     @Override
     public int getPunktePlayer1() {
-        return 0;
+        return this.punktePlayer1;
     }
 
     @Override
     public int getPunktePlayer2() {
-        return 0;
+        return this.punktePlayer2;
     }
 
     @Override
     public void setPunktePlayer1() {
-
+        this.punktePlayer1++;
     }
 
     @Override
     public void setPunktePlayer2() {
-
+        this.punktePlayer2++;
     }
 }

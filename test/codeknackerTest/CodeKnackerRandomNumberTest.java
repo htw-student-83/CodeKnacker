@@ -42,7 +42,7 @@ public class CodeKnackerRandomNumberTest {
         int zahlX = 1;
         int zahlY = 3;
         int zahlZ = 2;
-        boolean result = randomNumber.isAduplicate(zahlX,zahlY,zahlZ);
+        boolean result = randomNumber.isDuplicate(zahlX,zahlY,zahlZ);
         Assert.assertFalse(result);
     }
 
@@ -53,7 +53,7 @@ public class CodeKnackerRandomNumberTest {
         int zahlX = 1;
         int zahlY = 3;
         int zahlZ = 1;
-        boolean result = randomNumber.isAduplicate(zahlX,zahlY,zahlZ);
+        boolean result = randomNumber.isDuplicate(zahlX,zahlY,zahlZ);
         Assert.assertTrue(result);
     }
 
@@ -64,7 +64,7 @@ public class CodeKnackerRandomNumberTest {
         int zahlX = 1;
         int zahlY = 1;
         int zahlZ = 3;
-        boolean result = randomNumber.isAduplicate(zahlX,zahlY,zahlZ);
+        boolean result = randomNumber.isDuplicate(zahlX,zahlY,zahlZ);
         Assert.assertTrue(result);
     }
 
@@ -75,7 +75,7 @@ public class CodeKnackerRandomNumberTest {
         int zahlX = 3;
         int zahlY = 1;
         int zahlZ = 1;
-        boolean result = randomNumber.isAduplicate(zahlX,zahlY,zahlZ);
+        boolean result = randomNumber.isDuplicate(zahlX,zahlY,zahlZ);
         Assert.assertTrue(result);
     }
 }

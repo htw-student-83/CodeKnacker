@@ -4,7 +4,7 @@ public interface ICodeKnackerRandomNumbers {
 
     /**
      * create three unique random numbers between 0 and 9.
-     * @throws StatusException
+     * @throws StatusException, if..
      */
     void createThreeUniqueRandomNumbers() throws StatusException;
 
@@ -25,25 +25,25 @@ public interface ICodeKnackerRandomNumbers {
 
 
     /**
-     * create seperate random number and forwards to createThreeUniqueRandomNumbers().
+     * create a seperate random number
      * @return a randomNumber in the intervall between 0 and 9
      */
     int creationRandomNumber();
 
 
     /**
-     *
-     * @param i
-     * @return
+     * to get a random number from the array
+     * @param i, index, where a random number is
+     * @return a randomNumber
      */
-    int getFinalElement(int i);
+    int getElement(int i);
 
     /**
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @return
+     * checks is in the array a duplicate
+     * @param x random numberOne
+     * @param y random numberTwo
+     * @param z random numberThree
+     * @return true, if we have a duplicate otherwise false
      */
-    boolean isAduplicate(int x, int y, int z) throws StatusException;
+    boolean isDuplicate(int x, int y, int z) throws StatusException;
 }

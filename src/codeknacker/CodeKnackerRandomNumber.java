@@ -3,77 +3,39 @@ package codeknacker;
 public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
     public int[] code = new int[3];
 
+
     @Override
     public void createThreeUniqueRandomNumbers() throws StatusException {
         int randomNumberOne, randomNumberTwo, randomNumberThree;
         randomNumberOne = creationRandomNumber();
         randomNumberTwo = creationRandomNumber();
         randomNumberThree = creationRandomNumber();
-        if(!isAduplicate(randomNumberOne, randomNumberTwo, randomNumberThree)){
+        if(!isDuplicate(randomNumberOne, randomNumberTwo, randomNumberThree)){
             setRandomNumbersInArray(randomNumberOne, randomNumberTwo, randomNumberThree);
         }
     }
 
-    public boolean isAduplicate(int randomNumberOne, int randomNumberTwo, int randomNumberThree) throws StatusException {
-        if(randomNumberOne == randomNumberTwo || randomNumberOne == randomNumberThree || randomNumberTwo == randomNumberThree){
-            setRandomNumbersInArray(randomNumberOne,randomNumberTwo,randomNumberThree);
-            return true;
-        }
-        return false;
-    }
-
-    //Diese Methode kann auf private umgestellt werden
     @Override
     public void setRandomNumbersInArray(int randomNumberOne, int randomNumberTwo, int randomNumberThree) throws StatusException {
-        /*
-        int[] randomNumberArray = {randomNumberOne, randomNumberTwo, randomNumberThree};
-        setFinalCode(randomNumberArray);
-        //Recherchieren, ob die Übergabe korrekt ist!
-        //if(!isAduplicateInTheArray(code)){
-        //
-        //}
-
-         */
+        this.code[0] = randomNumberOne;
+        this.code[1] = randomNumberTwo;
+        this.code[2] = randomNumberThree;
     }
 
-/*
     @Override
-    public boolean isAduplicateInTheArray(int [] ramdomNumbers) throws StatusException {
-        for(int i = 0; i<ramdomNumbers.length; i++){
-            if(ramdomNumbers[i]!=ramdomNumbers[i+1]&&ramdomNumbers[i]!=ramdomNumbers[i+2]
-                    &&ramdomNumbers[i+1]!=ramdomNumbers[i+2]){
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    public void setFinalCode(int[] randomNumberArray){
-        /*
-        for(int i = 0; i<randomNumberArray.length; i++){
-            this.code[i] = randomNumberArray[i];
-        }
-
-
-    }
-*/
-    public int getFinalElement(int index){
-        return 0;
-        /*
-
-         this.code[index];
-
-         */
-    }
-
-    public int creationRandomNumber(){
-        /*
+    public int creationRandomNumber() {
         //Das Intervall [0;9] muss noch festgelegt werden!
         int randomNumber = (int) Math.round(Math.random());
-         randomNumber;
+        return randomNumber;
+    }
 
-         */
-        return 0;
+    @Override
+    public int getElement(int i) {
+        return this.code[i];
+    }
+
+    @Override
+    public boolean isDuplicate(int x, int y, int z) throws StatusException {
+        return x==y || x==z || y==z;
     }
 }
