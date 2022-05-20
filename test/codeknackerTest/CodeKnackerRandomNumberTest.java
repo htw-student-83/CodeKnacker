@@ -14,8 +14,9 @@ public class CodeKnackerRandomNumberTest {
         return new CodeKnackerRandomNumber();
     }
 
+
     @Test
-    public void firstRandomNumberAtIntervall () throws StatusException {
+    public void firstRandomNumberAtIntervall () {
         ICodeKnackerRandomNumbers randomNumber = this.object();
         int randomNumberOne = randomNumber.creationRandomNumber();
         Assert.assertTrue(randomNumberOne>=0);
@@ -24,7 +25,7 @@ public class CodeKnackerRandomNumberTest {
 
 
     @Test
-    public void setRandomNumbersInArray() throws StatusException {
+    public void setRandomNumbersInArray(){
         ICodeKnackerRandomNumbers randomNumber = this.object();
         final int MAXSIZEOFLIST = 3;
         List<Integer> randomNumberList = new ArrayList<>();
@@ -36,38 +37,45 @@ public class CodeKnackerRandomNumberTest {
 
 
     @Test
-    public void isDuplicateInTheArray1() throws StatusException {
+    public void isDuplicate() throws StatusException {
         ICodeKnackerRandomNumbers randomNumber = this.object();
-        int [] testArray = {1,2,3};
-        boolean result = randomNumber.isAduplicateInTheArray(testArray);
+        int zahlX = 1;
+        int zahlY = 3;
+        int zahlZ = 2;
+        boolean result = randomNumber.isAduplicate(zahlX,zahlY,zahlZ);
         Assert.assertFalse(result);
     }
 
 
     @Test
-    public void isDuplicateInTheArray2() throws StatusException {
+    public void isDuplicate2() throws StatusException {
         ICodeKnackerRandomNumbers randomNumber = this.object();
-        int [] testArray = {1,1,3};
-        boolean result = randomNumber.isAduplicateInTheArray(testArray);
+        int zahlX = 1;
+        int zahlY = 3;
+        int zahlZ = 1;
+        boolean result = randomNumber.isAduplicate(zahlX,zahlY,zahlZ);
         Assert.assertTrue(result);
     }
 
 
     @Test
-    public void isDuplicateInTheArray4() throws StatusException {
+    public void isDuplicate3() throws StatusException {
         ICodeKnackerRandomNumbers randomNumber = this.object();
-        int [] testArray = {1,3,1};
-        boolean result = randomNumber.isAduplicateInTheArray(testArray);
+        int zahlX = 1;
+        int zahlY = 1;
+        int zahlZ = 3;
+        boolean result = randomNumber.isAduplicate(zahlX,zahlY,zahlZ);
         Assert.assertTrue(result);
     }
 
 
-
     @Test
-    public void isDuplicateInTheArray3() throws StatusException {
+    public void isDuplicate4() throws StatusException {
         ICodeKnackerRandomNumbers randomNumber = this.object();
-        int [] testArray = {3,1,1};
-        boolean result = randomNumber.isAduplicateInTheArray(testArray);
+        int zahlX = 3;
+        int zahlY = 1;
+        int zahlZ = 1;
+        boolean result = randomNumber.isAduplicate(zahlX,zahlY,zahlZ);
         Assert.assertTrue(result);
     }
 }

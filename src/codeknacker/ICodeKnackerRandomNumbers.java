@@ -37,4 +37,13 @@ public interface ICodeKnackerRandomNumbers {
      * @return
      */
     int getFinalElement(int i);
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    boolean isAduplicate(int x, int y, int z) throws StatusException;
 }

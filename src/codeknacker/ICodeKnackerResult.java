@@ -13,9 +13,9 @@ public interface ICodeKnackerResult {
 
 
     /**
-     * if there not a winner for the ggame round the message "remi" is coming
-     * @return result of the current game round
-     * @throws
+     * if there not a winner for the current game round
+     * @return result of the game round
+     * @throws IOException
      */
     String aRemis() throws IOException;
 }

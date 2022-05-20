@@ -1,14 +1,12 @@
 package codeknackerTest;
 
 import codeknacker.*;
-import codeknackerUI.CodeKnackerUserCom;
-import codeknackerUI.ICodeKnackerUserCommunication;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
 
-public class APITest {
+public class InputCheckTest {
     int hintNumbertest1 = 4;
     int hintNumbertest2 = 1;
 
@@ -26,7 +24,7 @@ public class APITest {
     }
 
     @Test
-    public void theInputNumberIsWrong() throws WrongStatusException, StatusException {
+    public void theInputNumberIsWrong() throws WrongStatusException, StatusException, IOException {
         ICodeKnackerCheckUserNumber input = this.object();
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         randomNumber.setRandomNumbersInArray(1,2,3);
@@ -36,7 +34,7 @@ public class APITest {
 
 
     @Test
-    public void theInputNumberIsWrong2() throws WrongStatusException, StatusException {
+    public void theInputNumberIsWrongWithNoPoint() throws WrongStatusException, StatusException, IOException {
         ICodeKnackerCheckUserNumber input = this.object();
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         ICodeKnackerPunkte punkte = this.object4();
@@ -47,8 +45,9 @@ public class APITest {
         Assert.assertEquals(0, pruefZahl);
     }
 
+
     @Test
-    public void oneNumberIsFound() throws WrongStatusException, StatusException {
+    public void oneNumberIsFoundWithGettingPoint() throws WrongStatusException, StatusException, IOException {
         ICodeKnackerCheckUserNumber input = this.object();
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         ICodeKnackerPunkte punkte = this.object4();
@@ -60,13 +59,14 @@ public class APITest {
         Assert.assertEquals(1, punktPruef);
     }
 
+
     @Test
-    public void oneNumberIsFound2() throws WrongStatusException, StatusException, IOException {
+    public void oneNumberIsFoundWithoutWin() throws WrongStatusException, StatusException, IOException {
         ICodeKnackerCheckUserNumber input = this.object();
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         randomNumber.setRandomNumbersInArray(1,2,3);
         input.checkHintNumber(hintNumbertest2, 1);
-        boolean result = input.won();
-        Assert.assertFalse(result);
+        int result = input.endOfRound();
+        Assert.assertEquals(3, result);
     }
 }

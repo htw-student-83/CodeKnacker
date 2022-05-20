@@ -5,18 +5,21 @@ public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
 
     @Override
     public void createThreeUniqueRandomNumbers() throws StatusException {
-        /*
         int randomNumberOne, randomNumberTwo, randomNumberThree;
-        //Die Schleife wird solange durchlaufen bis jede Zufallszahl einmalig ist
-        do{
-            randomNumberOne = creationRandomNumber();
-            randomNumberTwo = creationRandomNumber();
-            randomNumberThree = creationRandomNumber();
-        }while(randomNumberOne==randomNumberTwo||randomNumberOne==randomNumberThree||randomNumberTwo==randomNumberThree);
+        randomNumberOne = creationRandomNumber();
+        randomNumberTwo = creationRandomNumber();
+        randomNumberThree = creationRandomNumber();
+        if(!isAduplicate(randomNumberOne, randomNumberTwo, randomNumberThree)){
+            setRandomNumbersInArray(randomNumberOne, randomNumberTwo, randomNumberThree);
+        }
+    }
 
-        setRandomNumbersInArray(randomNumberOne, randomNumberTwo, randomNumberThree);
-
-         */
+    public boolean isAduplicate(int randomNumberOne, int randomNumberTwo, int randomNumberThree) throws StatusException {
+        if(randomNumberOne == randomNumberTwo || randomNumberOne == randomNumberThree || randomNumberTwo == randomNumberThree){
+            setRandomNumbersInArray(randomNumberOne,randomNumberTwo,randomNumberThree);
+            return true;
+        }
+        return false;
     }
 
     //Diese Methode kann auf private umgestellt werden
@@ -33,7 +36,7 @@ public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
          */
     }
 
-    /*
+/*
     @Override
     public boolean isAduplicateInTheArray(int [] ramdomNumbers) throws StatusException {
         for(int i = 0; i<ramdomNumbers.length; i++){
@@ -44,7 +47,7 @@ public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
         }
         return true;
     }
-    */
+
 
     public void setFinalCode(int[] randomNumberArray){
         /*
@@ -52,9 +55,9 @@ public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
             this.code[i] = randomNumberArray[i];
         }
 
-         */
-    }
 
+    }
+*/
     public int getFinalElement(int index){
         return 0;
         /*
