@@ -1,5 +1,6 @@
 package codeknackerUI;
 
+import codeknacker.CodeKnackerImpl;
 import codeknacker.CodeKnackerRandomNumber;
 import codeknacker.GameException;
 import codeknackerNetwork.CodeKnackerTCPProtocolEngine;
@@ -10,6 +11,7 @@ import java.io.*;
 public class UICodeKnacker {
     CodeKnackerUserCom com = new CodeKnackerUserCom();
     CodeKnackerRandomNumber codeSolution = new CodeKnackerRandomNumber();
+    //CodeKnackerImpl index = new CodeKnackerImpl();
     private static final String CONNECT = "c";
     private static final String RulesOfTheGame = "r";
     private static final String START = "s";
@@ -126,9 +128,9 @@ public class UICodeKnacker {
                     case START:
                         try {
                             codeSolution.createThreeUniqueRandomNumbers();
-                            for(int i = 0; i<CodeKnackerRandomNumber.code.length;i++){
-                                System.out.print(CodeKnackerRandomNumber.code[i]);
-                            }
+                            //for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
+                            //    System.out.print(codeSolution.getElement(i));
+                            //}
                             System.out.println();
                             com.createTheUpperPartOfTheGameFrameStart();
                         }catch (GameException e){

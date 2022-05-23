@@ -84,7 +84,7 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         if(numberOfInputs<=maxOfNumberOfInputs){
             return true;
         }else{
-            status.setStatus(CodeKnackerStatus.ENDED);
+            //status.setStatus(CodeKnackerStatus.ENDED);
             createTheUpperPartOfTheGameFrameEnd();
             return false;
         }
@@ -108,7 +108,7 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
             punkte.setPunktePlayer1Zero();
             //Methode in die UserCom-Klasse verlagern!
             code.createThreeUniqueRandomNumbers();
-            for(int i = 0; i<CodeKnackerRandomNumber.code.length;i++){
+            for(int i = 0; i< CodeKnackerRandomNumber.code.length; i++){
                 System.out.print(CodeKnackerRandomNumber.code[i]);
             }
             System.out.println();
@@ -124,6 +124,7 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
         System.out.println("##################################### CodeKnacker #####################################");
         getStoryOfGame();
+        System.out.println("Aktuller Index: " + CodeKnackerImpl.index);
         String spieler = "Spieler1 ist dran.";
         System.out.println();
         int laengeSpielername  = spieler.length();
@@ -138,7 +139,6 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     }
 
     public void createTheUpperPartOfTheGameFrameContinue() throws Exception, NetworkException {
-        CodeKnackerUserCom com = new CodeKnackerUserCom();
         String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
         System.out.println("##################################### CodeKnacker #####################################");
         String spieler = "Spieler1 ist dran.";
@@ -155,9 +155,9 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     }
 
     public void createTheUpperPartOfTheGameFrame() throws Exception, NetworkException {
-        CodeKnackerUserCom com = new CodeKnackerUserCom();
         String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
         System.out.println("##################################### CodeKnacker #####################################");
+        System.out.println("Aktuller Index: " + CodeKnackerImpl.index);
         String spieler = "Spieler1 ist dran.";
         int laengeSpielername  = spieler.length();
         //int laenge  = upperPartOfTheGameFrame.length();
