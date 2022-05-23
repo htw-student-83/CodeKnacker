@@ -1,8 +1,10 @@
 package codeknacker;
 
-public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
-    public int[] code = new int[3];
+import java.util.Random;
 
+public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
+    public int[] code2 = {3, 2, 1};
+    public static int[] code = new int[3];
 
     @Override
     public void createThreeUniqueRandomNumbers() throws StatusException {
@@ -12,26 +14,29 @@ public class CodeKnackerRandomNumber implements ICodeKnackerRandomNumbers {
         randomNumberThree = creationRandomNumber();
         if(!isDuplicate(randomNumberOne, randomNumberTwo, randomNumberThree)){
             setRandomNumbersInArray(randomNumberOne, randomNumberTwo, randomNumberThree);
+        }else{
+            createThreeUniqueRandomNumbers();
         }
     }
 
     @Override
     public void setRandomNumbersInArray(int randomNumberOne, int randomNumberTwo, int randomNumberThree) throws StatusException {
-        this.code[0] = randomNumberOne;
-        this.code[1] = randomNumberTwo;
-        this.code[2] = randomNumberThree;
+        code[0] = randomNumberOne;
+        code[1] = randomNumberTwo;
+        code[2] = randomNumberThree;
     }
 
     @Override
     public int creationRandomNumber() {
-        //Das Intervall [0;9] muss noch festgelegt werden!
-        int randomNumber = (int) Math.round(Math.random());
+        Random zufall = new Random();
+        double zahl = (zufall.nextDouble()*10-1)+1;
+        int randomNumber = (int) Math.round(zahl);
         return randomNumber;
     }
 
     @Override
     public int getElement(int i) {
-        return this.code[i];
+        return code[i];
     }
 
     @Override

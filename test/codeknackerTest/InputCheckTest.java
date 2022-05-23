@@ -1,10 +1,10 @@
 package codeknackerTest;
 
 import codeknacker.*;
+import codeknackerUI.NetworkException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.IOException;
 
 public class InputCheckTest {
     int hintNumbertest1 = 4;
@@ -24,7 +24,7 @@ public class InputCheckTest {
     }
 
     @Test
-    public void theInputNumberIsWrong() throws WrongStatusException, StatusException, IOException {
+    public void theInputNumberIsWrong() throws Exception, NetworkException {
         ICodeKnackerCheckUserNumber input = this.object();
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         randomNumber.setRandomNumbersInArray(1,2,3);
@@ -34,7 +34,7 @@ public class InputCheckTest {
 
 
     @Test
-    public void theInputNumberIsWrongWithNoPoint() throws WrongStatusException, StatusException, IOException {
+    public void theInputNumberIsWrongWithNoPoint() throws Exception, NetworkException {
         ICodeKnackerCheckUserNumber input = this.object();
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         ICodeKnackerPunkte punkte = this.object4();
@@ -47,7 +47,7 @@ public class InputCheckTest {
 
 
     @Test
-    public void oneNumberIsFoundWithGettingPoint() throws WrongStatusException, StatusException, IOException {
+    public void oneNumberIsFoundWithGettingPoint() throws Exception, NetworkException {
         ICodeKnackerCheckUserNumber input = this.object();
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         ICodeKnackerPunkte punkte = this.object4();
@@ -61,12 +61,13 @@ public class InputCheckTest {
 
 
     @Test
-    public void oneNumberIsFoundWithoutWin() throws WrongStatusException, StatusException, IOException {
+    public void oneNumberIsFoundWithoutWin() throws Exception, NetworkException {
         ICodeKnackerCheckUserNumber input = this.object();
         ICodeKnackerRandomNumbers randomNumber = this.object3();
+        ICodeKnackerResult result = new CodeKnackerResult();
         randomNumber.setRandomNumbersInArray(1,2,3);
         input.checkHintNumber(hintNumbertest2, 1);
-        int result = input.endOfRound();
-        Assert.assertEquals(3, result);
+        input.endOfRound();
+        result.feedbackOfTheRound(2);
     }
 }

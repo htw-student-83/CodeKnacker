@@ -18,4 +18,10 @@ public interface ICodeKnackerResult {
      * @throws IOException
      */
     String aRemis() throws IOException;
+
+    /**
+     *
+     * @param checkNumber
+     */
+    void feedbackOfTheRound(int checkNumber);
 }

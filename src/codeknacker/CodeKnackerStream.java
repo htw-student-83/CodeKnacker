@@ -3,7 +3,7 @@ package codeknacker;
 import java.io.*;
 
 public class CodeKnackerStream implements ICodeKnackerStreamsTheResult {
-    private final String filename = "gameresult";
+    private final String filename = "gameresult.txt";
 
     @Override
     public String restoreGameResult() throws IOException {

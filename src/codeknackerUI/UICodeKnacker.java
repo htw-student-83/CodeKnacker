@@ -1,10 +1,15 @@
 package codeknackerUI;
 
+import codeknacker.CodeKnackerRandomNumber;
+import codeknacker.GameException;
 import codeknackerNetwork.CodeKnackerTCPProtocolEngine;
+import codeknacker.CodeKnackerStream;
 import codeknackerNetwork.TCPStream;
 import java.io.*;
 
 public class UICodeKnacker {
+    CodeKnackerUserCom com = new CodeKnackerUserCom();
+    CodeKnackerRandomNumber codeSolution = new CodeKnackerRandomNumber();
     private static final String CONNECT = "c";
     private static final String RulesOfTheGame = "r";
     private static final String START = "s";
@@ -18,7 +23,6 @@ public class UICodeKnacker {
     private TCPStream tcpStream;
     private CodeKnackerTCPProtocolEngine protocolEngine;
     private String partnerName;
-
 
     public static void main(String[] args) throws Exception {
         System.out.println();
@@ -35,14 +39,17 @@ public class UICodeKnacker {
 
         userCmd.printUsage();
         userCmd.runCommandLoop();
-
+        /*
         //to start the game, if two systems are connected
-        if(true) {
-            //Wenn 2 Spieler feststehen
-            //createTheUpperPartOfTheGameFrame();
+        if(this.status==CodeKnackerStatus.CONNECTED) {
+            //ComKlasse einfügen!
+            CodeKnackerPlayerStatus status = new CodeKnackerPlayerStatus();
+            status = CodeKnackerStatus.START;
+            com.createTheUpperPartOfTheGameFrameStart();
         } else {
-            //when something is failed
+           throw new NetworkException("Unfortnetly you don't conntect with an other player.");
         }
+         */
     }
 
     public UICodeKnacker(String playerName, PrintStream os, InputStream is) throws Exception {
@@ -80,7 +87,7 @@ public class UICodeKnacker {
         this.outStream.println(b.toString());
     }
 
-    public void runCommandLoop() {
+    public void runCommandLoop() throws Exception {
         boolean again = true;
 
         while (again) {
@@ -117,7 +124,16 @@ public class UICodeKnacker {
                         this.getRules();
                         break;
                     case START:
-                        this.createTheUpperPartOfTheGameFrame();
+                        try {
+                            codeSolution.createThreeUniqueRandomNumbers();
+                            for(int i = 0; i<CodeKnackerRandomNumber.code.length;i++){
+                                System.out.print(CodeKnackerRandomNumber.code[i]);
+                            }
+                            System.out.println();
+                            com.createTheUpperPartOfTheGameFrameStart();
+                        }catch (GameException e){
+                            e.printStackTrace();
+                        }
                         break;
                     case HISTORY:
                         //this.doSet(parameterString);
@@ -125,7 +141,8 @@ public class UICodeKnacker {
                         break;
                     case EXIT:
                         again = false;
-                        this.doExit();
+                        //Auf die ComKlasse beziehen!
+                        com.doExit();
                         break; // end loop
                     default:
                         this.outStream.println("your commant is invalid:" + cmdLineString);
@@ -136,17 +153,20 @@ public class UICodeKnacker {
             } catch (IOException ex) {
                 this.outStream.println("cannot read from input stream - fatal, give up");
                 try {
-                    this.doExit();
+                    //Auf die ComKlasse beziehen!
+                    com.doExit();
                 } catch (IOException e) {
                     // ignore
                 }
             } catch (RuntimeException ex) {
                 this.outStream.println("runtime problems: " + ex.getLocalizedMessage());
+            } catch (NetworkException e) {
+                e.printStackTrace();
             }
         }
     }
 
-    private void getRules() {
+    private void getRules() throws Exception {
         System.out.println("//Rules:");
         System.out.println("//Allow are only numbers at intervall [0;9]");
         System.out.println("//one point for a right input number");
@@ -157,20 +177,13 @@ public class UICodeKnacker {
         runCommandLoop();
     }
 
-    private void doExit() throws IOException {
-        System.exit(0);
-        // shutdown engines which needs to be
-        //this.protocolEngine.close();
+    private void openHistory() throws IOException {
+        //Mit Streams die Daten aus einer txt-Datei lesen
+        CodeKnackerStream stream = new CodeKnackerStream();
+        stream.restoreGameResult();
     }
 
-    private void openHistory() {
-        //Mit Streams die Daten aus einer txt-Datei auslesen
-        System.out.println("It's coming soon.");
-        printUsage();
-        runCommandLoop();
-    }
-
-    private void doConnect(String parameterString) {
+    private void doConnect(String parameterString) throws Exception {
         System.out.println("It's coming soon.");
         printUsage();
         runCommandLoop();
@@ -178,9 +191,11 @@ public class UICodeKnacker {
 
         String hostname = null;
 
+
         try {
             StringTokenizer st = new StringTokenizer(parameterString);
             hostname = st.nextToken();
+            this.status = CodeKnackerStatus.CONNECTED;
         }
         catch(NoSuchElementException e) {
             System.out.println("no hostname provided - take localhost");
@@ -191,36 +206,6 @@ public class UICodeKnacker {
         this.tcpStream.setRemoteEngine(hostname);
         this.tcpStream.setStreamCreationListener(this);
         this.tcpStream.start();
-         */
-    }
-
-
-    public void createTheUpperPartOfTheGameFrame() {
-        String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
-        System.out.println("##################################### CodeKnacker #####################################");
-        System.out.println("Vorgeschichte:");
-        System.out.println("Vor Jahren hat sich Alice einen Safe zugelegt, um ihre Wertsachen in Sicherheit zu wissen.");
-        System.out.println("Leider hat sie ihren Code vergessen-(");
-        System.out.println("Damit der Code nicht in falsche Hände gerät, überlegte sich Alice einst sich diese Zahlenkombination nicht zu notieren *oh*.");
-        System.out.println("Da sie im Raten von Zahlen auch nicht besonders erfolgreich ist, braucht sie dringend eure Hilfe.");
-        printUsage();
-        runCommandLoop();
-        /*
-        String spieler = "Spieler1 ist dran.";
-        int laengeSpielername  = spieler.length();
-        int laenge  = upperPartOfTheGameFrame.length();
-        System.out.print(upperPartOfTheGameFrame);
-        System.out.println();
-        System.out.println();
-        System.out.print("Spieler1 ist dran.");
-        createUnderline(laengeSpielername);
-        System.out.println();
-        System.out.print("Dein Tipp für die 1. Zahl lautet?");
-        System.out.println();
-
-        System.out.print("1. Tipp: -Usereingabe-");
-        System.out.println();
-        System.out.println();
          */
     }
 }
