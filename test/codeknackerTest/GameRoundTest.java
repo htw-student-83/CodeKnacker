@@ -13,6 +13,7 @@ public class GameRoundTest {
     public static final String ALICE = "Alice"; //playernumber 1
     public static final String BOB = "Bob";//playernumber 2
 
+    //den Objekten passende Namen geben!
     private ICodeKnackerStreamsTheResult object() {
         return new CodeKnackerStream();
     }

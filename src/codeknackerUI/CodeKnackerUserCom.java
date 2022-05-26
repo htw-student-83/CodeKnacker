@@ -11,6 +11,8 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
 
     CodeKnackerPlayerStatus status = new CodeKnackerPlayerStatus();
     CodeKnackerRandomNumber code = new CodeKnackerRandomNumber();
+    CodeKnackerDrawFrame frame = new CodeKnackerDrawFrame();
+    CodeKnackerPunkte punkte = new CodeKnackerPunkte();
 
     @Override
     public void deliveryHint(String playerName, int hint) throws IllegalArgumentException {
@@ -29,7 +31,7 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
             Scanner inputUser = new Scanner(System.in);
             //User gibt eine Kommazahl ein
             if(!inputUser.hasNextInt()){
-                throw new GameException("Du hast eine Kommazahl eingegeben.");
+                throw new DoubleNumberException("Du hast eine Kommazahl eingegeben.");
             //User gibt eine negative Zahl ein
             }
 
@@ -37,7 +39,7 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
             int userHintNumber = Integer.parseInt(inputUserString);
 
             if(userHintNumber<0){
-                throw new GameException("Du hast eine negative Zahl eingegeben.");
+                throw new NegativNumberException("Du hast eine negative Zahl eingegeben.");
             //User gibt Zahl außerhalb des Wertebereiches an
             }
 
@@ -75,8 +77,16 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     }
     */
 
+    public static void setNumberOfInputsToOne(){
+        numberOfInputs = 1;
+    }
+
     public static void incrementNumberOfInputs(){
         numberOfInputs++;
+    }
+
+    public static int getNumberOfInputs(){
+        return numberOfInputs;
     }
 
     @Override
@@ -100,17 +110,17 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         System.out.println("(n)");
         Scanner inputUser = new Scanner(System.in);
         String input = inputUser.next();
-        if(!(inputUser.next().equals("j") || inputUser.next().equals("n"))){
-            System.err.println("Du hast ein ungültiges Zeichen eingegeben.");
+        if(!(inputUser.nextLine().equals("j") || inputUser.nextLine().equals("n"))){
+            System.err.println("Your input is invalid.");
             askForAsecondRound();
         }else if(input.equals("j")){
             numberOfInputs = 1;
             punkte.setPunktePlayer1Zero();
             //Methode in die UserCom-Klasse verlagern!
             code.createThreeUniqueRandomNumbers();
-            for(int i = 0; i< CodeKnackerRandomNumber.code.length; i++){
-                System.out.print(CodeKnackerRandomNumber.code[i]);
-            }
+            //for(int i = 0; i< CodeKnackerRandomNumber.code.length; i++){
+            //    System.out.print(CodeKnackerRandomNumber.code[i]);
+            //}
             System.out.println();
             impl.setI();
             createTheUpperPartOfTheGameFrameContinue();
@@ -121,10 +131,11 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
 
     public void createTheUpperPartOfTheGameFrameStart() throws Exception, NetworkException {
         CodeKnackerUserCom com = new CodeKnackerUserCom();
-        String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
-        System.out.println("##################################### CodeKnacker #####################################");
+        CodeKnackerDrawFrame frame = new CodeKnackerDrawFrame();
+        //String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
+        System.out.println(frame.createTheUpperGameFrameStart());
+        //System.out.println("##################################### CodeKnacker #####################################");
         getStoryOfGame();
-        System.out.println("Aktuller Index: " + CodeKnackerImpl.index);
         String spieler = "Spieler1 ist dran.";
         System.out.println();
         int laengeSpielername  = spieler.length();
@@ -133,14 +144,22 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         System.out.print(spieler);
         createUnderline(laengeSpielername);
         System.out.println();
-        System.out.print("Dein " + CodeKnackerUserCom.numberOfInputs + ". Tipp für die gesuchte Zahl lautet?");
+        CodeKnackerUserCom.userRequest();
+        //System.out.print("Your " + CodeKnackerUserCom.numberOfInputs + ". hint for the following search number at index " + CodeKnackerImpl.index + " lautet?");
         System.out.println();
-        yourHint();
+        //Prüfen, ob diese Variante sinnvoll ist!
+        try {
+            yourHint();
+        }catch (DoubleNumberException | NegativNumberException | GameException e){
+            System.err.println(e);
+            yourHint();
+        }
     }
 
     public void createTheUpperPartOfTheGameFrameContinue() throws Exception, NetworkException {
-        String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
-        System.out.println("##################################### CodeKnacker #####################################");
+        //String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
+        //System.out.println("##################################### CodeKnacker #####################################");
+        System.out.println(frame.createTheUpperGameFrameContinue());
         String spieler = "Spieler1 ist dran.";
         System.out.println();
         int laengeSpielername  = spieler.length();
@@ -149,15 +168,19 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         System.out.print(spieler);
         createUnderline(laengeSpielername);
         System.out.println();
-        System.out.print("Dein " + CodeKnackerUserCom.numberOfInputs + ". Tipp für die gesuchte Zahl lautet?");
+        //Als Funktion ausgeben lassen
+        CodeKnackerUserCom.userRequest();
+        //System.out.print("Your " + CodeKnackerUserCom.numberOfInputs + ". hint for the following search number at index " + CodeKnackerImpl.index + " lautet?");
         System.out.println();
         yourHint();
     }
 
     public void createTheUpperPartOfTheGameFrame() throws Exception, NetworkException {
-        String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
-        System.out.println("##################################### CodeKnacker #####################################");
-        System.out.println("Aktuller Index: " + CodeKnackerImpl.index);
+        //String upperPartOfTheGameFrame = "##################################### CodeKnacker #####################################";
+        //Als Funktion ausgeben lassen!
+        //System.out.println("##################################### CodeKnacker #####################################");
+        System.out.println(frame.createTheUpperGameFrameContinue());
+        System.out.println();
         String spieler = "Spieler1 ist dran.";
         int laengeSpielername  = spieler.length();
         //int laenge  = upperPartOfTheGameFrame.length();
@@ -165,8 +188,9 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         System.out.print(spieler);
         createUnderline(laengeSpielername);
         System.out.println();
-        System.out.print("Dein " + CodeKnackerUserCom.numberOfInputs + ". Tipp für die gesuchte Zahl lautet?");
+        CodeKnackerUserCom.userRequest();
         System.out.println();
+        //Mit try-catch verpacken!
         yourHint();
     }
 
@@ -191,13 +215,19 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         //this.protocolEngine.close();
     }
 
+    public static void userRequest(){
+        System.out.print("Your " + CodeKnackerUserCom.numberOfInputs +
+                ". hint for the following search number at index " + CodeKnackerImpl.index + " is?");
+    }
+
     public void createTheUpperPartOfTheGameFrameEnd() throws Exception, NetworkException {
-        CodeKnackerPunkte punkte = new CodeKnackerPunkte();
         String upperPartOfTheGameFrameEnd = "############################### CodeKnacker - Spielende ###############################";
+        //Wert als Funktion zurückgeben lassen!
         int laenge = upperPartOfTheGameFrameEnd.length();
-        System.out.println(upperPartOfTheGameFrameEnd);
+        //System.out.println(upperPartOfTheGameFrameEnd);
+        System.out.println(frame.createTheUpperGameFrameEnd());
         System.out.println();
-        System.out.print("Der gesuchte Zahlencode lautet: " + Arrays.toString(CodeKnackerRandomNumber.code));
+        System.out.print("The right code is: " + Arrays.toString(CodeKnackerRandomNumber.code));
         System.out.println();
         System.out.println("Du hast folgende Punktezahl erreicht: " + punkte.getPunktePlayer1());
         //System.out.print("Gewonnen/Verloren hat: Spieler1/ Spieler2");
@@ -208,16 +238,16 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     }
 
     public static void createTheDownPartOfTheGameFrame(int zeichenlaenge) {
-        //funktionen(
-        //Hier werden die Ergebnisse durch weitere Funktionen dargestellt
-        //1. Die gesuchte Zahlenkombination in der Form Zahlencode: [x, y, z]
-        //2. Sieger/Verlierer/ Unentschieden
-        //   - Sieger in Form -> Gewonnen hat: Spielername1/Spielername2
-        //   - Verloren in Form -> Verloren hat: Spielername2/Spielername1
-        //   - Das Spiel ist unentschieden ausgegangen
-        // );
         for (int i = 0; i<zeichenlaenge; i++){
           System.out.print("#");
         }
     }
+
+    //funktionen(
+    //Hier werden die Ergebnisse durch weitere Funktionen dargestellt
+    //1. Die gesuchte Zahlenkombination in der Form Zahlencode: [x, y, z]
+    //2. Sieger/ Unentschieden
+    //   - Sieger in Form -> Gewonnen hat: Spielername1/Spielername2
+    //   - Unentschieden in Form -> Gewonnen hat: niemand
+    // );
 }

@@ -1,29 +1,31 @@
 package codeknackerUI;
 
-import codeknacker.ICodeKnackerDrawFrame;
-import codeknacker.StatusException;
-
 import java.io.IOException;
 
 public class CodeKnackerDrawFrame implements ICodeKnackerDrawFrame {
 
     @Override
-    public String createTheUpperGameFrameStart() throws StatusException {
-        return "";
+    public String createTheUpperGameFrameStart(){
+        return "##################################### CodeKnacker #####################################";
     }
 
     @Override
-    public String createTheUpperGameFrameEnd() throws IOException {
-        return "";
+    public String createTheUpperGameFrameEnd()throws IOException {
+        return "############################### CodeKnacker - Spielende ###############################";
     }
 
     @Override
     public String createTheDownGameFrameEnd() throws IOException {
-        return "";
+        return null;
     }
 
     @Override
-    public String createANUnderlineForPlayerName() throws StatusException {
+    public String createTheUpperGameFrameContinue() {
+        return "##################################### CodeKnacker #####################################";
+    }
+
+    @Override
+    public String createANUnderlineForPlayerName() {
         return "";
     }
 }

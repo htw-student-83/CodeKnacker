@@ -9,8 +9,9 @@ import org.junit.Test;
 public class InputCheckTest {
     int hintNumbertest1 = 4;
     int hintNumbertest2 = 1;
+    int hintNumbertest3 = 2;
 
-
+    //den Objekten passende Namen geben!
     private ICodeKnackerCheckUserNumber object() {
         return new CodeKnackerImpl();
     }
@@ -21,6 +22,10 @@ public class InputCheckTest {
 
     private ICodeKnackerPunkte object4(){
         return new CodeKnackerPunkte();
+    }
+
+    private ICodeKnackerCheckUserNumber object5(){
+        return new CodeKnackerImpl();
     }
 
     @Test
@@ -61,7 +66,7 @@ public class InputCheckTest {
 
 
     @Test
-    public void oneNumberIsFoundWithoutWin() throws Exception, NetworkException {
+    public void firstNumberIsFoundWithoutWin() throws Exception, NetworkException {
         ICodeKnackerCheckUserNumber input = this.object();
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         ICodeKnackerResult result = new CodeKnackerResult();
@@ -69,5 +74,18 @@ public class InputCheckTest {
         input.checkHintNumber(hintNumbertest2, 1);
         input.endOfRound();
         result.feedbackOfTheRound(2);
+    }
+
+    @Test
+    public void secondNumberIsFoundWithoutWin() throws Exception, NetworkException {
+        ICodeKnackerCheckUserNumber input = this.object();
+        ICodeKnackerRandomNumbers randomNumber = this.object3();
+        CodeKnackerImpl impl = new CodeKnackerImpl();
+        randomNumber.setRandomNumbersInArray(1,2,3);
+        input.checkHintNumber(hintNumbertest2, 1);
+        impl.setI();
+        boolean feedback = input.checkHintNumber(hintNumbertest3, 2);
+        input.endOfRound();
+        Assert.assertTrue(feedback);
     }
 }

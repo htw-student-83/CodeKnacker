@@ -128,9 +128,9 @@ public class UICodeKnacker {
                     case START:
                         try {
                             codeSolution.createThreeUniqueRandomNumbers();
-                            //for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
-                            //    System.out.print(codeSolution.getElement(i));
-                            //}
+                            for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
+                                System.out.print(codeSolution.getElement(i));
+                            }
                             System.out.println();
                             com.createTheUpperPartOfTheGameFrameStart();
                         }catch (GameException e){
