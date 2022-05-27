@@ -49,20 +49,20 @@ public class GameRoundTest {
         int [] code = {4,5,6};
 
         //Zahl X
-        checkInput.checkHintNumber(2, 1);
-        checkInput.checkHintNumber(1, 2);
-        checkInput.checkHintNumber(4, 1);
+        checkInput.checkHintNumberForTesting(2, 1);
+        checkInput.checkHintNumberForTesting(1, 2);
+        checkInput.checkHintNumberForTesting(4, 1);
         punkte.setPunktePlayer1();
 
         //Zahl Y
-        checkInput.checkHintNumber(2, 2);
-        checkInput.checkHintNumber(5, 1);
+        checkInput.checkHintNumberForTesting(2, 2);
+        checkInput.checkHintNumberForTesting(5, 1);
         punkte.setPunktePlayer1();
 
         //Zahl Z
-        checkInput.checkHintNumber(4, 2);
-        checkInput.checkHintNumber(5, 1);
-        checkInput.checkHintNumber(6, 2);
+        checkInput.checkHintNumberForTesting(4, 2);
+        checkInput.checkHintNumberForTesting(5, 1);
+        checkInput.checkHintNumberForTesting(6, 2);
         punkte.setPunktePlayer2();
         checkInput.endOfRound();
         result.feedbackOfTheRound(1);
@@ -85,23 +85,23 @@ public class GameRoundTest {
         //to put a final code for the first simulation
         int [] code = {4,5,6};
         //Zahl X
-        checkInput.checkHintNumber(2, 1);
-        checkInput.checkHintNumber(1, 2);
-        checkInput.checkHintNumber(3, 1);
-        checkInput.checkHintNumber(4, 2);
+        checkInput.checkHintNumberForTesting(2, 1);
+        checkInput.checkHintNumberForTesting(1, 2);
+        checkInput.checkHintNumberForTesting(3, 1);
+        checkInput.checkHintNumberForTesting(4, 2);
         punkte.setPunktePlayer2();
 
         //Zahl Y
-        checkInput.checkHintNumber(2, 1);
-        checkInput.checkHintNumber(1, 2);
-        checkInput.checkHintNumber(7, 1);
-        checkInput.checkHintNumber(5, 2);
+        checkInput.checkHintNumberForTesting(2, 1);
+        checkInput.checkHintNumberForTesting(1, 2);
+        checkInput.checkHintNumberForTesting(7, 1);
+        checkInput.checkHintNumberForTesting(5, 2);
         punkte.setPunktePlayer2();
 
         //Zahl Z
-        checkInput.checkHintNumber(2, 1);
-        checkInput.checkHintNumber(1, 2);
-        checkInput.checkHintNumber(6, 1);
+        checkInput.checkHintNumberForTesting(2, 1);
+        checkInput.checkHintNumberForTesting(1, 2);
+        checkInput.checkHintNumberForTesting(6, 1);
         punkte.setPunktePlayer1();
         checkInput.endOfRound();
         result.feedbackOfTheRound(1);
@@ -161,10 +161,10 @@ public class GameRoundTest {
         //herer to simulate a game round with a remi at the end
         int[] code = {4, 5, 6};
         //Zahl X
-        checkInput.checkHintNumber(2, 1);
-        checkInput.checkHintNumber(1, 2);
-        checkInput.checkHintNumber(3, 1);
-        checkInput.checkHintNumber(4, 2);
+        checkInput.checkHintNumberForTesting(2, 1);
+        checkInput.checkHintNumberForTesting(1, 2);
+        checkInput.checkHintNumberForTesting(3, 1);
+        checkInput.checkHintNumberForTesting(4, 2);
         punkte.setPunktePlayer2();
         checkInput.endOfRound();
         result.feedbackOfTheRound(2);
@@ -175,8 +175,8 @@ public class GameRoundTest {
         ICodeKnackerCheckUserNumber checkInput = this.object6();
         int[] code = {4, 5, 6};
         //Zahl X
-        checkInput.checkHintNumber(2, 1);
-        checkInput.checkHintNumber(1, 1);
+        checkInput.checkHintNumberForTesting(2, 1);
+        checkInput.checkHintNumberForTesting(1, 1);
     }
 
     @Test(expected = WrongStatusException.class)
@@ -184,7 +184,7 @@ public class GameRoundTest {
         ICodeKnackerCheckUserNumber checkInput = this.object6();
         int[] code = {4, 5, 6};
         //Zahl X
-        checkInput.checkHintNumber(2, 2);
-        checkInput.checkHintNumber(1, 2);
+        checkInput.checkHintNumberForTesting(2, 2);
+        checkInput.checkHintNumberForTesting(1, 2);
     }
 }

@@ -33,7 +33,7 @@ public class InputCheckTest {
         ICodeKnackerCheckUserNumber input = this.object();
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        boolean result =  input.checkHintNumber(hintNumbertest1, 1);
+        boolean result =  input.checkHintNumberForTesting(hintNumbertest1, 1);
         Assert.assertFalse(result);
     }
 
@@ -44,7 +44,7 @@ public class InputCheckTest {
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         ICodeKnackerPunkte punkte = this.object4();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        boolean result = input.checkHintNumber(hintNumbertest1, 1);
+        boolean result = input.checkHintNumberForTesting(hintNumbertest1, 1);
         int pruefZahl = punkte.getPunktePlayer1();
         Assert.assertFalse(result);
         Assert.assertEquals(0, pruefZahl);
@@ -57,7 +57,7 @@ public class InputCheckTest {
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         ICodeKnackerPunkte punkte = this.object4();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        boolean result = input.checkHintNumber(hintNumbertest2, 1);
+        boolean result = input.checkHintNumberForTesting(hintNumbertest2, 1);
         punkte.setPunktePlayer1();
         int punktPruef  = punkte.getPunktePlayer1();
         Assert.assertTrue(result);
@@ -71,7 +71,7 @@ public class InputCheckTest {
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         ICodeKnackerResult result = new CodeKnackerResult();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        input.checkHintNumber(hintNumbertest2, 1);
+        input.checkHintNumberForTesting(hintNumbertest2, 1);
         input.endOfRound();
         result.feedbackOfTheRound(2);
     }
@@ -82,9 +82,9 @@ public class InputCheckTest {
         ICodeKnackerRandomNumbers randomNumber = this.object3();
         CodeKnackerImpl impl = new CodeKnackerImpl();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        input.checkHintNumber(hintNumbertest2, 1);
+        input.checkHintNumberForTesting(hintNumbertest2, 1);
         impl.setI();
-        boolean feedback = input.checkHintNumber(hintNumbertest3, 2);
+        boolean feedback = input.checkHintNumberForTesting(hintNumbertest3, 2);
         input.endOfRound();
         Assert.assertTrue(feedback);
     }

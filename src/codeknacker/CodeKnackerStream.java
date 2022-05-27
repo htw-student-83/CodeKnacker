@@ -3,14 +3,13 @@ package codeknacker;
 import java.io.*;
 
 public class CodeKnackerStream implements ICodeKnackerStreamsTheResult {
-    private final String filename = "gameresult.txt";
 
     @Override
     public String restoreGameResult() throws IOException {
         InputStream is = null;
         String result = "";
         try {
-            is = new FileInputStream(filename);
+            is = new FileInputStream("gameresult.txt");
         }catch (FileNotFoundException e){
             System.err.println("File can't be opened right now." + e.getMessage());
             System.exit(0);
@@ -21,8 +20,9 @@ public class CodeKnackerStream implements ICodeKnackerStreamsTheResult {
         }catch (IOException ex) {
             System.err.println("Something was wrong." + ex.getMessage());
             System.exit(0);
+        }finally {
+            dais.close();
         }
-        dais.close();
         return result;
     }
 
@@ -30,7 +30,7 @@ public class CodeKnackerStream implements ICodeKnackerStreamsTheResult {
     public void saveGameResult(String gameResult) throws IOException {
         OutputStream os = null;
         try {
-            os = new FileOutputStream(filename);
+            os = new FileOutputStream("gameresult.txt");
         }catch (FileNotFoundException e){
             System.err.println("File can't be opened right now." + e.getMessage());
             System.exit(0);

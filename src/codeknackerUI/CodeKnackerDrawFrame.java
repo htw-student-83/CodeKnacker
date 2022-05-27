@@ -6,22 +6,18 @@ public class CodeKnackerDrawFrame implements ICodeKnackerDrawFrame {
 
     @Override
     public String createTheUpperGameFrameStart(){
-        return "##################################### CodeKnacker #####################################";
+        return "##################################### CodeKnacker - Start #####################################";
     }
 
     @Override
     public String createTheUpperGameFrameEnd()throws IOException {
-        return "############################### CodeKnacker - Spielende ###############################";
-    }
-
-    @Override
-    public String createTheDownGameFrameEnd() throws IOException {
-        return null;
+        String frameEnd = "################################### CodeKnacker - Spielende ###################################";
+        return "################################### CodeKnacker - Spielende ###################################";
     }
 
     @Override
     public String createTheUpperGameFrameContinue() {
-        return "##################################### CodeKnacker #####################################";
+        return "######################################## CodeKnacker #########################################";
     }
 
     @Override

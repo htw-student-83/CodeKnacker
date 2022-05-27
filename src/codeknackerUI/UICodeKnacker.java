@@ -42,14 +42,14 @@ public class UICodeKnacker {
         userCmd.printUsage();
         userCmd.runCommandLoop();
         /*
-        //to start the game, if two systems are connected
+        //to start the game, if two players are connected
         if(this.status==CodeKnackerStatus.CONNECTED) {
             //ComKlasse einfügen!
             CodeKnackerPlayerStatus status = new CodeKnackerPlayerStatus();
             status = CodeKnackerStatus.START;
             com.createTheUpperPartOfTheGameFrameStart();
         } else {
-           throw new NetworkException("Unfortnetly you don't conntect with an other player.");
+           throw new NetworkException("Unfortnetly the connection was failed.");
         }
          */
     }
@@ -163,9 +163,21 @@ public class UICodeKnacker {
             } catch (RuntimeException ex) {
                 this.outStream.println("runtime problems: " + ex.getLocalizedMessage());
             } catch (NetworkException e) {
-                e.printStackTrace();
+                this.outStream.println("problems with the network: " + e.getLocalizedMessage());
             }
         }
+    }
+
+    /**
+     * to choose the first player of the game
+     * @return the playernumber
+     */
+    private int chooseTheFirstPlayer(){
+        int minRandomNumber = 0;
+        int maxRandomNumber = 1;
+        int randomNumber = (int) Math.floor(Math.random()*(maxRandomNumber-minRandomNumber+1)
+                +minRandomNumber);
+        return randomNumber;
     }
 
     private void getRules() throws Exception {
@@ -174,15 +186,19 @@ public class UICodeKnacker {
         System.out.println("//one point for a right input number");
         System.out.println("//if the input number is wrong the user will get a feedback");
         System.out.println("//after every input the next player is turn");
-        System.out.println("//every player has 2-3attempts to guess the right of three numbers");
+        System.out.println("//every player has 3 attempts to guess the right of three numbers");
         printUsage();
         runCommandLoop();
     }
 
-    private void openHistory() throws IOException {
+    private void openHistory() throws Exception {
         //Mit Streams die Daten aus einer txt-Datei lesen
+        String testString = "test123";
         CodeKnackerStream stream = new CodeKnackerStream();
-        stream.restoreGameResult();
+        stream.saveGameResult(testString);
+        System.out.println("Die letzte Rounde gewann: " + stream.restoreGameResult());
+        printUsage();
+        runCommandLoop();
     }
 
     private void doConnect(String parameterString) throws Exception {

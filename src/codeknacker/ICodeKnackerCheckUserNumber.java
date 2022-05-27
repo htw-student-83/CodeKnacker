@@ -23,4 +23,6 @@ public interface ICodeKnackerCheckUserNumber {
     //Polymorphie:
     //zwei verschiedene Methoden, die von außen gleichsind, werden von unterschiedlichen Objekten aufgerufen,
     //weil sie verschieden implementiert sind
+
+    boolean checkHintNumberForTesting(int number, int playernumber)throws Exception, NetworkException;
 }
