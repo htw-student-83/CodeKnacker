@@ -14,23 +14,23 @@ public class GameRoundTest {
     public static final String BOB = "Bob";//playernumber 2
 
     //den Objekten passende Namen geben!
-    private ICodeKnackerStreamsTheResult object() {
+    private ICodeKnackerStreamsTheResult resultStreamObject() {
         return new CodeKnackerStream();
     }
 
-    private ICodeKnackerUserCommunication object2() {
+    private ICodeKnackerUserCommunication communicationObject() {
         return new CodeKnackerUserCom();
     }
 
-    private ICodeKnackerCheckUserNumber object6 (){
+    private ICodeKnackerCheckUserNumber checkUserNumberObject(){
         return new CodeKnackerImpl();
     }
 
-    private ICodeKnackerResult object4(){
+    private ICodeKnackerResult resultObject(){
         return new CodeKnackerResult();
     }
 
-    private ICodeKnackerPunkte object5(){
+    private ICodeKnackerPunkte pointObject(){
         return new CodeKnackerPunkte();
     }
 
@@ -38,11 +38,11 @@ public class GameRoundTest {
     //Jeder Spieler hat 3 Versuche
     @Test
     public void aWinnerTest() throws Exception, NetworkException {
-        ICodeKnackerStreamsTheResult stream = this.object();
-        ICodeKnackerUserCommunication userinput = this.object2();
-        ICodeKnackerPunkte punkte = this.object5();
-        ICodeKnackerCheckUserNumber checkInput = this.object6();
-        ICodeKnackerResult result = this.object4();
+        ICodeKnackerStreamsTheResult stream = this.resultStreamObject();
+        ICodeKnackerUserCommunication userinput = this.communicationObject();
+        ICodeKnackerPunkte punkte = this.pointObject();
+        ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
+        ICodeKnackerResult result = this.resultObject();
 
         //herer to simulate a game round with an winner at the end
         //to put a final code for the simulation
@@ -77,11 +77,11 @@ public class GameRoundTest {
     public void aWinnerTest2() throws Exception, NetworkException {
 
         //herer to simulate a game round with an winner at the end
-        ICodeKnackerStreamsTheResult stream = this.object();
-        ICodeKnackerUserCommunication userinput = this.object2();
-        ICodeKnackerResult result = this.object4();
-        ICodeKnackerPunkte punkte = this.object5();
-        ICodeKnackerCheckUserNumber checkInput = this.object6();
+        ICodeKnackerStreamsTheResult stream = this.resultStreamObject();
+        ICodeKnackerUserCommunication userinput = this.communicationObject();
+        ICodeKnackerResult result = this.resultObject();
+        ICodeKnackerPunkte punkte = this.pointObject();
+        ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         //to put a final code for the first simulation
         int [] code = {4,5,6};
         //Zahl X
@@ -112,36 +112,35 @@ public class GameRoundTest {
         Assert.assertEquals("Bob", resultWinner);
     }
 
-    /*
     @Test
-    public void aRemiTest() throws Exception {
-        ICodeKnackerStreamsTheResult stream = this.object();
-        ICodeKnackerUserCommunication userinput = this.object2();
-        ICodeKnackerResult result = this.object4();
-        ICodeKnackerPunkte punkte = this.object5();
-        ICodeKnackerCheckUserNumber checkInput = this.object6();
+    public void aRemiTest() throws Exception, NetworkException {
+        ICodeKnackerStreamsTheResult stream = this.resultStreamObject();
+        ICodeKnackerUserCommunication userinput = this.communicationObject();
+        ICodeKnackerResult result = this.resultObject();
+        ICodeKnackerPunkte punkte = this.pointObject();
+        ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         //herer to simulate a game round with a remi at the end
         int [] code = {4,5,6};
         //Zahl X
-        checkInput.checkHintNumber(2, 1);
-        checkInput.checkHintNumber(1, 2);
-        checkInput.checkHintNumber(3, 1);
-        checkInput.checkHintNumber(4, 2);
+        checkInput.checkHintNumberForTesting(2, 1);
+        checkInput.checkHintNumberForTesting(1, 2);
+        checkInput.checkHintNumberForTesting(3, 1);
+        checkInput.checkHintNumberForTesting(4, 2);
         punkte.setPunktePlayer2();
 
         //Zahl Y
-        checkInput.checkHintNumber(2, 1);
-        checkInput.checkHintNumber(1, 2);
-        checkInput.checkHintNumber(5, 1);
+        checkInput.checkHintNumberForTesting(2, 1);
+        checkInput.checkHintNumberForTesting(1, 2);
+        checkInput.checkHintNumberForTesting(5, 1);
         punkte.setPunktePlayer1();
 
         //Zahl Z
-        checkInput.checkHintNumber(2, 1);
-        checkInput.checkHintNumber(1, 2);
-        checkInput.checkHintNumber(4, 1);
-        checkInput.checkHintNumber(3, 2);
-        checkInput.checkHintNumber(8, 1);
-        checkInput.checkHintNumber(7, 2);
+        checkInput.checkHintNumberForTesting(2, 1);
+        checkInput.checkHintNumberForTesting(1, 2);
+        checkInput.checkHintNumberForTesting(4, 1);
+        checkInput.checkHintNumberForTesting(3, 2);
+        checkInput.checkHintNumberForTesting(8, 1);
+        checkInput.checkHintNumberForTesting(7, 2);
         checkInput.endOfRound();
         result.feedbackOfTheRound(1);
         //How does simulate that two players are playing?
@@ -150,14 +149,14 @@ public class GameRoundTest {
         String savedResultGame = stream.restoreGameResult();
         Assert.assertEquals("Unentschieden", savedResultGame);
     }
-     */
+
     @Test
     public void continueTest() throws Exception, NetworkException {
-        ICodeKnackerStreamsTheResult stream = this.object();
-        ICodeKnackerUserCommunication userinput = this.object2();
-        ICodeKnackerResult result = this.object4();
-        ICodeKnackerPunkte punkte = this.object5();
-        ICodeKnackerCheckUserNumber checkInput = this.object6();
+        ICodeKnackerStreamsTheResult stream = this.resultStreamObject();
+        ICodeKnackerUserCommunication userinput = this.communicationObject();
+        ICodeKnackerResult result = this.resultObject();
+        ICodeKnackerPunkte punkte = this.pointObject();
+        ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         //herer to simulate a game round with a remi at the end
         int[] code = {4, 5, 6};
         //Zahl X
@@ -172,7 +171,7 @@ public class GameRoundTest {
 
     @Test(expected = WrongStatusException.class)
     public void aGameRoundWithAStatusFaild() throws Exception, NetworkException {
-        ICodeKnackerCheckUserNumber checkInput = this.object6();
+        ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         int[] code = {4, 5, 6};
         //Zahl X
         checkInput.checkHintNumberForTesting(2, 1);
@@ -181,7 +180,7 @@ public class GameRoundTest {
 
     @Test(expected = WrongStatusException.class)
     public void aGameRoundWithAStatusFaild2() throws Exception, NetworkException {
-        ICodeKnackerCheckUserNumber checkInput = this.object6();
+        ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         int[] code = {4, 5, 6};
         //Zahl X
         checkInput.checkHintNumberForTesting(2, 2);

@@ -24,9 +24,6 @@ public class InputCheckTest {
         return new CodeKnackerPunkte();
     }
 
-    private ICodeKnackerCheckUserNumber object5(){
-        return new CodeKnackerImpl();
-    }
 
     @Test
     public void theInputNumberIsWrong() throws Exception, NetworkException {
@@ -85,7 +82,9 @@ public class InputCheckTest {
         input.checkHintNumberForTesting(hintNumbertest2, 1);
         impl.setI();
         boolean feedback = input.checkHintNumberForTesting(hintNumbertest3, 2);
+        impl.setI();
         input.endOfRound();
         Assert.assertTrue(feedback);
+        //Prüfen, das auch das Ende einer Runde noch nicht erreicht ist
     }
 }

@@ -8,22 +8,19 @@ import java.util.Scanner;
 public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     private static int numberOfInputs = 1;
     private final static int maxOfNumberOfInputs = 3;
+    private int playernumber = 0;
     //private final String localPlayerName;
 
-    //Fehlerbehandlung für den Start überarbeiten!
-
-    CodeKnackerPlayerStatus status = new CodeKnackerPlayerStatus();
     CodeKnackerRandomNumber code = new CodeKnackerRandomNumber();
     CodeKnackerDrawFrame frame = new CodeKnackerDrawFrame();
     CodeKnackerPunkte punkte = new CodeKnackerPunkte();
+    CodeKnackerPlayerStatus status = new CodeKnackerPlayerStatus();
+
 
 
     @Override
-    public void yourHint() throws Exception, NetworkException {
+    public void yourHint() throws Exception, NetworkException{
         //status.setStatus(CodeKnackerStatus.PLAYER_1);
-        //if(this.numberOfInputs == 0){
-            //Methode in eine andere Klasse verlangern!
-        //}
         boolean userIsReady = howIsYourNumberTip();
         if(userIsReady){
             CodeKnackerImpl impl = new CodeKnackerImpl();
@@ -45,7 +42,8 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
             if(userHintNumber<0 || userHintNumber>9){
                 throw new GameException("Your input number is outside the intervall.");
             }else{
-                impl.checkHintNumber(userHintNumber, 1);
+                impl.checkHintNumber(userHintNumber, playernumber);
+                incrementPlayernumber();
             }
         }else{
             //Spielende
@@ -99,6 +97,27 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     }
 
 
+    private int incrementPlayernumber(){
+        return this.playernumber++;
+    }
+
+    private int decrementPlayernumber(){
+        return this.playernumber--;
+    }
+
+    /**
+     * to choose the first player of the game
+     * @return the playernumber
+     */
+    public int  chooseTheFirstPlayer(){
+        int minRandomNumber = 0;
+        int maxRandomNumber = 1;
+        int randomNumber = (int) Math.floor(Math.random()*(maxRandomNumber-minRandomNumber+1)
+                +minRandomNumber);
+        this.playernumber = randomNumber;
+        return randomNumber;
+    }
+
     @Override
     public void askForAsecondRound() throws Exception, NetworkException {
         CodeKnackerImpl impl = new CodeKnackerImpl();
@@ -129,7 +148,13 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         System.out.println(frame.createTheUpperGameFrameStart());
         getStoryOfGame();
         //Hier muss bestimmt werden, welcher Spieler zuerst an der Reihe ist
-        //chooseTheFristPlayer()
+        //if(playerN == 0){
+            //status = CodeKnackerStatus.PLAYER_1;
+            //TODO
+        //}else{
+            //status = CodeKnackerStatus.PLAYER_2;
+            //TODO
+        //}
         String spieler = "Spieler1 ist dran.";
         System.out.println();
         int laengeSpielername  = spieler.length();
@@ -158,9 +183,9 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         System.out.print(spieler);
         createUnderline(laengeSpielername);
         code.createThreeUniqueRandomNumbers();
-        for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
-            System.out.print(code.getElement(i));
-        }
+        //for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
+        //    System.out.print(code.getElement(i));
+        //}
         System.out.println();
         CodeKnackerUserCom.userRequest();
         System.out.println();
@@ -198,7 +223,8 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         System.out.println("Vorgeschichte:");
         System.out.println("Vor Jahren hat sich Alice einen Safe zugelegt, um ihre Wertsachen in Sicherheit zu wissen.");
         System.out.println("Leider hat sie ihren Code vergessen-(");
-        System.out.println("Damit der Code nicht in falsche Hände gerät, überlegte sich Alice einst sich diese Zahlenkombination nicht zu notieren *oh*.");
+        System.out.println("Damit der Code nicht in falsche Hände gerät, " +
+                "überlegte sich Alice einst sich diese Zahlenkombination nicht zu notieren *oh*.");
         System.out.println("Da sie im Raten von Zahlen auch nicht besonders erfolgreich ist, braucht sie dringend eure Hilfe.");
     }
 
@@ -222,11 +248,16 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
 
     public void createTheUpperPartOfTheGameFrameEnd() throws Exception, NetworkException {
         //Der Zustand beider Spieler ist im Endzustand
-        //Es findet dann der Punktevergleich statt
+        //if(StatusPlayer1 = CodeKnackerStatus.ENDED && StatusPlayer2 = CodeKnackerStatus.ENDED){
+            //Es findet dann der Punktevergleich und die Auswertung statt
+        //}
+        CodeKnackerImpl endOfRound = new CodeKnackerImpl();
+        String winner = endOfRound.won();
         System.out.println(frame.createTheUpperGameFrameEnd());
         System.out.println();
         System.out.print("The right code is: " + Arrays.toString(CodeKnackerRandomNumber.code));
         System.out.println();
+        //System.out.println("Gewonnen hat: " + winner);
         System.out.println("Du hast folgende Punktezahl erreicht: " + punkte.getPunktePlayer1());
         //Ab hier wird der Gewinner/ das Unentschieden in die file gespeichert werden
         //System.out.print("Gewonnen hat: Spieler1/ Spieler2");

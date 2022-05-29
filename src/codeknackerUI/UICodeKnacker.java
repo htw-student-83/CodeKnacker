@@ -1,6 +1,5 @@
 package codeknackerUI;
 
-import codeknacker.CodeKnackerImpl;
 import codeknacker.CodeKnackerRandomNumber;
 import codeknacker.GameException;
 import codeknackerNetwork.CodeKnackerTCPProtocolEngine;
@@ -11,7 +10,6 @@ import java.io.*;
 public class UICodeKnacker {
     CodeKnackerUserCom com = new CodeKnackerUserCom();
     CodeKnackerRandomNumber codeSolution = new CodeKnackerRandomNumber();
-    //CodeKnackerImpl index = new CodeKnackerImpl();
     private static final String CONNECT = "c";
     private static final String RulesOfTheGame = "r";
     private static final String START = "s";
@@ -132,18 +130,17 @@ public class UICodeKnacker {
                                 System.out.print(codeSolution.getElement(i));
                             }
                             System.out.println();
+                            int playerNumber = com.chooseTheFirstPlayer();
                             com.createTheUpperPartOfTheGameFrameStart();
                         }catch (GameException e){
                             e.printStackTrace();
                         }
                         break;
                     case HISTORY:
-                        //this.doSet(parameterString);
                         this.openHistory();
                         break;
                     case EXIT:
                         again = false;
-                        //Auf die ComKlasse beziehen!
                         com.doExit();
                         break; // end loop
                     default:
@@ -155,7 +152,6 @@ public class UICodeKnacker {
             } catch (IOException ex) {
                 this.outStream.println("cannot read from input stream - fatal, give up");
                 try {
-                    //Auf die ComKlasse beziehen!
                     com.doExit();
                 } catch (IOException e) {
                     // ignore
@@ -166,18 +162,6 @@ public class UICodeKnacker {
                 this.outStream.println("problems with the network: " + e.getLocalizedMessage());
             }
         }
-    }
-
-    /**
-     * to choose the first player of the game
-     * @return the playernumber
-     */
-    private int chooseTheFirstPlayer(){
-        int minRandomNumber = 0;
-        int maxRandomNumber = 1;
-        int randomNumber = (int) Math.floor(Math.random()*(maxRandomNumber-minRandomNumber+1)
-                +minRandomNumber);
-        return randomNumber;
     }
 
     private void getRules() throws Exception {
@@ -192,7 +176,6 @@ public class UICodeKnacker {
     }
 
     private void openHistory() throws Exception {
-        //Mit Streams die Daten aus einer txt-Datei lesen
         String testString = "test123";
         CodeKnackerStream stream = new CodeKnackerStream();
         stream.saveGameResult(testString);
