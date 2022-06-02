@@ -15,25 +15,31 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     CodeKnackerDrawFrame frame = new CodeKnackerDrawFrame();
     CodeKnackerPunkte punkte = new CodeKnackerPunkte();
     CodeKnackerPlayerStatus status = new CodeKnackerPlayerStatus();
-
+    //CodeKnackerImpl endOfRound = new CodeKnackerImpl();
 
 
     @Override
     public void yourHint() throws Exception, NetworkException{
         //status.setStatus(CodeKnackerStatus.PLAYER_1);
         boolean userIsReady = howIsYourNumberTip();
-        if(userIsReady){
+        if(userIsReady) {
             CodeKnackerImpl impl = new CodeKnackerImpl();
             Scanner inputUser = new Scanner(System.in);
-            //User gibt eine Kommazahl ein
+
             if (!inputUser.hasNextDouble()){
                 throw new GameException("Your input is invalid.");
             }
 
-            //User gibt eine Kommazahl ein
-            if(!inputUser.hasNextInt()){
-                throw new DoubleNumberException("Your input wasn't a positive number.");
+            if (!inputUser.hasNextInt()){
+                throw new GameException("Your input was not a positive number incl. zero.");
             }
+
+            //Prüfen, ob user einen String,aber keine Zahl eingegeben hat
+            //TODO
+
+            //if(!Character.isDigit(Integer.parseInt(userinput))){
+            //     throw new GameException("Your input is invalid.");
+            //}
 
             String inputUserString = inputUser.next();
             int userHintNumber = Integer.parseInt(inputUserString);
@@ -247,20 +253,13 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     }
 
     public void createTheUpperPartOfTheGameFrameEnd() throws Exception, NetworkException {
-        //Der Zustand beider Spieler ist im Endzustand
-        //if(StatusPlayer1 = CodeKnackerStatus.ENDED && StatusPlayer2 = CodeKnackerStatus.ENDED){
-            //Es findet dann der Punktevergleich und die Auswertung statt
-        //}
-        CodeKnackerImpl endOfRound = new CodeKnackerImpl();
-        String winner = endOfRound.won();
+        //String winner = endOfRound.won();
         System.out.println(frame.createTheUpperGameFrameEnd());
         System.out.println();
         System.out.print("The right code is: " + Arrays.toString(CodeKnackerRandomNumber.code));
         System.out.println();
         //System.out.println("Gewonnen hat: " + winner);
         System.out.println("Du hast folgende Punktezahl erreicht: " + punkte.getPunktePlayer1());
-        //Ab hier wird der Gewinner/ das Unentschieden in die file gespeichert werden
-        //System.out.print("Gewonnen hat: Spieler1/ Spieler2");
         System.out.println();
         String frameEnd = frame.createTheUpperGameFrameEnd();
         int lengthOfFrameEnd = frameEnd.length();
@@ -274,12 +273,4 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
           System.out.print("#");
         }
     }
-
-    //funktionen(
-    //Hier werden die Ergebnisse durch weitere Funktionen dargestellt
-    //1. Die gesuchte Zahlenkombination in der Form Zahlencode: [x, y, z]
-    //2. Sieger/ Unentschieden
-    //   - Sieger in Form -> Gewonnen hat: Spielername1/Spielername2
-    //   - Unentschieden in Form -> Gewonnen hat: niemand
-    // );
 }

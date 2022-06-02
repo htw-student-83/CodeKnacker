@@ -14,12 +14,6 @@ public interface ICodeKnackerCheckUserNumber {
      */
     boolean checkHintNumber(int number, int playernumber) throws Exception, NetworkException;
 
-    /**
-     * checks have we already a winner of a round
-     * @return true, when a player with the most points exists otherwise false
-     * @throws IOException
-     */
-    void endOfRound()throws IOException;
     //Polymorphie:
     //zwei verschiedene Methoden, die von außen gleichsind, werden von unterschiedlichen Objekten aufgerufen,
     //weil sie verschieden implementiert sind

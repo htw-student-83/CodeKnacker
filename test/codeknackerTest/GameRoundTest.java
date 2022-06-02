@@ -6,7 +6,6 @@ import codeknackerUI.ICodeKnackerUserCommunication;
 import codeknackerUI.NetworkException;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.io.IOException;
 
 public class GameRoundTest {
@@ -64,8 +63,7 @@ public class GameRoundTest {
         checkInput.checkHintNumberForTesting(5, 1);
         checkInput.checkHintNumberForTesting(6, 2);
         punkte.setPunktePlayer2();
-        checkInput.endOfRound();
-        result.feedbackOfTheRound(1);
+        //checkInput.won();
         //How does simulate that two players are playing?
         stream.saveGameResult(ALICE);
         String resultWinner = stream.restoreGameResult();
@@ -103,11 +101,8 @@ public class GameRoundTest {
         checkInput.checkHintNumberForTesting(1, 2);
         checkInput.checkHintNumberForTesting(6, 1);
         punkte.setPunktePlayer1();
-        checkInput.endOfRound();
-        result.feedbackOfTheRound(1);
+        //checkInput.won();
         //How does simulate that two players are playing?
-
-        stream.saveGameResult(BOB);
         String resultWinner = stream.restoreGameResult();
         Assert.assertEquals("Bob", resultWinner);
     }
@@ -141,13 +136,10 @@ public class GameRoundTest {
         checkInput.checkHintNumberForTesting(3, 2);
         checkInput.checkHintNumberForTesting(8, 1);
         checkInput.checkHintNumberForTesting(7, 2);
-        checkInput.endOfRound();
-        result.feedbackOfTheRound(1);
+        //checkInput.won();
         //How does simulate that two players are playing?
-        String resultGame = result.aRemis();
-        stream.saveGameResult(resultGame);
         String savedResultGame = stream.restoreGameResult();
-        Assert.assertEquals("Unentschieden", savedResultGame);
+        Assert.assertEquals("niemand", savedResultGame);
     }
 
     @Test
@@ -165,8 +157,8 @@ public class GameRoundTest {
         checkInput.checkHintNumberForTesting(3, 1);
         checkInput.checkHintNumberForTesting(4, 2);
         punkte.setPunktePlayer2();
-        checkInput.endOfRound();
-        result.feedbackOfTheRound(2);
+        //Assert.assertTrue(Player1Status!=CodeKnackerStatus.ENDED);
+        //Assert.assertTrue(Player2Status!=CodeKnackerStatus.ENDED);
     }
 
     @Test(expected = WrongStatusException.class)

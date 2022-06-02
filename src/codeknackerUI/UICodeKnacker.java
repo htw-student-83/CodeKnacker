@@ -126,9 +126,9 @@ public class UICodeKnacker {
                     case START:
                         try {
                             codeSolution.createThreeUniqueRandomNumbers();
-                            for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
-                                System.out.print(codeSolution.getElement(i));
-                            }
+                            //for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
+                            //    System.out.print(codeSolution.getElement(i));
+                            //}
                             System.out.println();
                             int playerNumber = com.chooseTheFirstPlayer();
                             com.createTheUpperPartOfTheGameFrameStart();
@@ -166,7 +166,7 @@ public class UICodeKnacker {
 
     private void getRules() throws Exception {
         System.out.println("//Rules:");
-        System.out.println("//Allow are only numbers at intervall [0;9]");
+        System.out.println("//Allow are only positive numbers incl. zero at intervall [0;9]");
         System.out.println("//one point for a right input number");
         System.out.println("//if the input number is wrong the user will get a feedback");
         System.out.println("//after every input the next player is turn");
