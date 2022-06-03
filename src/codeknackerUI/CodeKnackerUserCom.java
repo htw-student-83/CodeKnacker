@@ -9,6 +9,8 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     private static int numberOfInputs = 1;
     private final static int maxOfNumberOfInputs = 3;
     private int playernumber = 0;
+    private final static int theSmallestValidRandomNumber = 0;
+    private final static int theBiggestValidRandomNumber = 9;
     //private final String localPlayerName;
 
     CodeKnackerRandomNumber code = new CodeKnackerRandomNumber();
@@ -45,7 +47,8 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
             int userHintNumber = Integer.parseInt(inputUserString);
 
             //User gibt Zahl außerhalb des Wertebereiches an
-            if(userHintNumber<0 || userHintNumber>9){
+            if(userHintNumber < CodeKnackerUserCom.theSmallestValidRandomNumber ||
+                    userHintNumber > CodeKnackerUserCom.theBiggestValidRandomNumber){
                 throw new GameException("Your input number is outside the intervall.");
             }else{
                 impl.checkHintNumber(userHintNumber, playernumber);
@@ -91,6 +94,11 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         return numberOfInputs;
     }
 
+
+    public static int getMaxOfNumberOfInputs() {
+        return maxOfNumberOfInputs;
+    }
+
     @Override
     public boolean howIsYourNumberTip() throws Exception, NetworkException {
         if(numberOfInputs<=maxOfNumberOfInputs){
@@ -116,10 +124,10 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
      * @return the playernumber
      */
     public int  chooseTheFirstPlayer(){
-        int minRandomNumber = 0;
-        int maxRandomNumber = 1;
-        int randomNumber = (int) Math.floor(Math.random()*(maxRandomNumber-minRandomNumber+1)
-                +minRandomNumber);
+        int firstPlayerNumber = 0;
+        int secondPlayerNumber = 1;
+        int randomNumber = (int) Math.floor(Math.random()*(secondPlayerNumber-firstPlayerNumber+1)
+                +firstPlayerNumber);
         this.playernumber = randomNumber;
         return randomNumber;
     }

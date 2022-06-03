@@ -39,6 +39,7 @@ public class UICodeKnacker {
 
         userCmd.printUsage();
         userCmd.runCommandLoop();
+
         /*
         //to start the game, if two players are connected
         if(this.status==CodeKnackerStatus.CONNECTED) {
@@ -126,9 +127,9 @@ public class UICodeKnacker {
                     case START:
                         try {
                             codeSolution.createThreeUniqueRandomNumbers();
-                            //for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
-                            //    System.out.print(codeSolution.getElement(i));
-                            //}
+                            for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
+                                System.out.print(codeSolution.getElement(i));
+                            }
                             System.out.println();
                             int playerNumber = com.chooseTheFirstPlayer();
                             com.createTheUpperPartOfTheGameFrameStart();
