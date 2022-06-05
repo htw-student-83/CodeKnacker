@@ -17,17 +17,15 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     CodeKnackerDrawFrame frame = new CodeKnackerDrawFrame();
     CodeKnackerPunkte punkte = new CodeKnackerPunkte();
     CodeKnackerPlayerStatus status = new CodeKnackerPlayerStatus();
-    //CodeKnackerImpl endOfRound = new CodeKnackerImpl();
-
 
     @Override
     public void yourHint() throws Exception, NetworkException{
+        CodeKnackerImpl impl = new CodeKnackerImpl();
         //status.setStatus(CodeKnackerStatus.PLAYER_1);
         boolean userIsReady = howIsYourNumberTip();
         if(userIsReady) {
-            CodeKnackerImpl impl = new CodeKnackerImpl();
-            Scanner inputUser = new Scanner(System.in);
 
+            Scanner inputUser = new Scanner(System.in);
             if (!inputUser.hasNextDouble()){
                 throw new GameException("Your input is invalid.");
             }
@@ -74,13 +72,31 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
          */
     }
 
-
     /*
-    public String yourHint2() throws IllegalArgumentException {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+    public void yourHintTesting() throws Exception, NetworkException {
+        //CodeKnackerImpl impl = new CodeKnackerImpl();
+        Scanner inputUser = new Scanner(System.in);
+        if (!inputUser.hasNextDouble()){
+            throw new GameException("Your input is invalid.");
+        }
+
+        if (!inputUser.hasNextInt()){
+            throw new GameException("Your input was not a positive number incl. zero.");
+        }
+
+        String inputUserString = inputUser.next();
+        int userHintNumber = Integer.parseInt(inputUserString);
+
+        //User gibt Zahl außerhalb des Wertebereiches an
+        if(userHintNumber < CodeKnackerUserCom.theSmallestValidRandomNumber ||
+                userHintNumber > CodeKnackerUserCom.theBiggestValidRandomNumber){
+            throw new GameException("Your input number is outside the intervall.");
+        }else{
+            impl.checkHintNumberForTesting(userHintNumber, playernumber);
+            incrementPlayernumber();
+        }
     }
-    */
+     */
 
     public static void setNumberOfInputsToOne(){
         numberOfInputs = 1;
@@ -93,7 +109,6 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     public static int getNumberOfInputs(){
         return numberOfInputs;
     }
-
 
     public static int getMaxOfNumberOfInputs() {
         return maxOfNumberOfInputs;
@@ -157,34 +172,51 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         }
     }
 
-    public void createTheUpperPartOfTheGameFrameStart() throws Exception, NetworkException {
+    public void createTheUpperPartOfTheGameFrameStart(int playernumber) throws Exception, NetworkException {
         CodeKnackerDrawFrame frame = new CodeKnackerDrawFrame();
         System.out.println(frame.createTheUpperGameFrameStart());
         getStoryOfGame();
         //Hier muss bestimmt werden, welcher Spieler zuerst an der Reihe ist
-        //if(playerN == 0){
+        if(playernumber == 0){
             //status = CodeKnackerStatus.PLAYER_1;
             //TODO
-        //}else{
+            String spieler = "Spieler1 ist dran.";
+            System.out.println();
+            int laengeSpielername  = spieler.length();
+            System.out.print(spieler);
+            createUnderline(laengeSpielername);
+            System.out.println();
+            CodeKnackerUserCom.userRequest();
+            System.out.println();
+            //Prüfen, ob diese Variante sinnvoll ist!
+            try {
+                yourHint();
+            }catch (DoubleNumberException | NegativNumberException | GameException e){
+                System.err.println(e.getLocalizedMessage());
+                CodeKnackerUserCom.userRequest();
+                yourHint();
+            }
+        }else{
             //status = CodeKnackerStatus.PLAYER_2;
             //TODO
-        //}
-        String spieler = "Spieler1 ist dran.";
-        System.out.println();
-        int laengeSpielername  = spieler.length();
-        System.out.print(spieler);
-        createUnderline(laengeSpielername);
-        System.out.println();
-        CodeKnackerUserCom.userRequest();
-        System.out.println();
-        //Prüfen, ob diese Variante sinnvoll ist!
-        try {
-            yourHint();
-        }catch (DoubleNumberException | NegativNumberException | GameException e){
-            System.err.println(e.getLocalizedMessage());
+            String spieler = "Spieler2 ist dran.";
+            System.out.println();
+            int laengeSpielername  = spieler.length();
+            System.out.print(spieler);
+            createUnderline(laengeSpielername);
+            System.out.println();
             CodeKnackerUserCom.userRequest();
-            yourHint();
+            System.out.println();
+            //Prüfen, ob diese Variante sinnvoll ist!
+            try {
+                yourHint();
+            }catch (DoubleNumberException | NegativNumberException | GameException e){
+                System.err.println(e.getLocalizedMessage());
+                CodeKnackerUserCom.userRequest();
+                yourHint();
+            }
         }
+
     }
 
     public void createTheUpperPartOfTheGameFrameContinue() throws Exception, NetworkException {
@@ -237,9 +269,8 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         System.out.println("Vorgeschichte:");
         System.out.println("Vor Jahren hat sich Alice einen Safe zugelegt, um ihre Wertsachen in Sicherheit zu wissen.");
         System.out.println("Leider hat sie ihren Code vergessen-(");
-        System.out.println("Damit der Code nicht in falsche Hände gerät, " +
-                "überlegte sich Alice einst sich diese Zahlenkombination nicht zu notieren *oh*.");
-        System.out.println("Da sie im Raten von Zahlen auch nicht besonders erfolgreich ist, braucht sie dringend eure Hilfe.");
+        System.out.println("Damit der Code nicht in falsche Hände gerät, hat sich Alice diesen code auch nicht notiert *oh*.");
+        System.out.println("Da sie im Raten von Zahlen auch nicht besonders gut ist, braucht sie dringend Hilfe.");
     }
 
     public void createUnderline(int lSpielername) {

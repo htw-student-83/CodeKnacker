@@ -11,6 +11,7 @@ import java.io.IOException;
 public class GameRoundTest {
     public static final String ALICE = "Alice"; //playernumber 1
     public static final String BOB = "Bob";//playernumber 2
+    public static final String REMI = "niemand";
 
     //den Objekten passende Namen geben!
     private ICodeKnackerStreamsTheResult resultStreamObject() {
@@ -43,7 +44,7 @@ public class GameRoundTest {
         ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         ICodeKnackerResult result = this.resultObject();
 
-        //herer to simulate a game round with an winner at the end
+        //herer to simulate a game round with a winner at the end
         //to put a final code for the simulation
         int [] code = {4,5,6};
 
@@ -65,16 +66,15 @@ public class GameRoundTest {
         punkte.setPunktePlayer2();
         //checkInput.won();
         //How does simulate that two players are playing?
-        stream.saveGameResult(ALICE);
+        //stream.saveGameResult(ALICE);
         String resultWinner = stream.restoreGameResult();
-        Assert.assertEquals("Alice", resultWinner);
+        Assert.assertEquals(ALICE, resultWinner);
     }
 
 
     @Test
     public void aWinnerTest2() throws Exception, NetworkException {
-
-        //herer to simulate a game round with an winner at the end
+        //herer to simulate a game round with a winner at the end
         ICodeKnackerStreamsTheResult stream = this.resultStreamObject();
         ICodeKnackerUserCommunication userinput = this.communicationObject();
         ICodeKnackerResult result = this.resultObject();
@@ -104,7 +104,7 @@ public class GameRoundTest {
         //checkInput.won();
         //How does simulate that two players are playing?
         String resultWinner = stream.restoreGameResult();
-        Assert.assertEquals("Bob", resultWinner);
+        Assert.assertEquals(BOB, resultWinner);
     }
 
     @Test
@@ -139,7 +139,7 @@ public class GameRoundTest {
         //checkInput.won();
         //How does simulate that two players are playing?
         String savedResultGame = stream.restoreGameResult();
-        Assert.assertEquals("niemand", savedResultGame);
+        Assert.assertEquals(REMI, savedResultGame);
     }
 
     @Test

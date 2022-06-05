@@ -1,7 +1,7 @@
 package codeknacker;
 
 public class CodeKnackerPunkte implements ICodeKnackerPunkte {
-    private static int  punktePlayer1 = 0;
+    private static int punktePlayer1 = 0;
     private static int punktePlayer2 = 0;
 
     @Override

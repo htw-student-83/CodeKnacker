@@ -14,6 +14,7 @@ public class CodeKnackerUserInputTest {
         InputStream is = new ByteArrayInputStream(validNumber.getBytes());
         //Sorgt dafür, das die Bytes der Variable begriff der Klasse aus Zeile 25 zugewiesen wird
         System.setIn(is);
+
     }
 
     @Test(expected = GameException.class)

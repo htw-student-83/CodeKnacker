@@ -132,7 +132,7 @@ public class UICodeKnacker {
                             }
                             System.out.println();
                             int playerNumber = com.chooseTheFirstPlayer();
-                            com.createTheUpperPartOfTheGameFrameStart();
+                            com.createTheUpperPartOfTheGameFrameStart(playerNumber);
                         }catch (GameException e){
                             e.printStackTrace();
                         }
