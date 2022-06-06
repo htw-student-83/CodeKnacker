@@ -27,4 +27,8 @@ public class CodeKnackerPunkte implements ICodeKnackerPunkte {
     public void setPunktePlayer1Zero(){
         punktePlayer1 = 0;
     }
+
+    public void setPunktePlayer2Zero() {
+        punktePlayer2 = 0;
+    }
 }

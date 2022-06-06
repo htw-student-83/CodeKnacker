@@ -1,3 +1,4 @@
+
 package codeknacker;
 
 import codeknackerUI.CodeKnackerUserCom;
@@ -5,15 +6,16 @@ import codeknackerUI.NetworkException;
 
 import java.io.IOException;
 
-public class CodeKnackerResult implements ICodeKnackerResult {
+public class CodeKnackerResult {
+
     CodeKnackerImpl impl = new CodeKnackerImpl();
     CodeKnackerStream stream = new CodeKnackerStream();
     CodeKnackerUserCom com = new CodeKnackerUserCom();
 
-
+/*
     @Override
     public String theWinnerIs() throws IOException {
-        /*
+
         //Den konkreten Spielernamen am Ende richtig zuordnen!
         CodeKnackerPunkte punkte_player1 = new CodeKnackerPunkte();
         int sum_player1 = punkte_player1.getPunktePlayer1();
@@ -25,15 +27,16 @@ public class CodeKnackerResult implements ICodeKnackerResult {
         }else{
             return "unentschieden";
         }
-         */
+
         return "";
     }
-
+*/
+    /*
     @Override
     public String aRemis() throws IOException {
         return null;
     }
-
+/*
     @Override
     public void feedbackOfTheRound(int checkNumber){
         switch(checkNumber){
@@ -72,7 +75,6 @@ public class CodeKnackerResult implements ICodeKnackerResult {
                 }
                 break;
         }
-
         /*
             case 3:
                 String remi = "Schade, es gibt keinen Sieger.";
@@ -88,7 +90,10 @@ public class CodeKnackerResult implements ICodeKnackerResult {
             case 4:
                 //Spiel wird fortgesetzt
         }
-         */
         }
     }
+ */
 }
+
+
+

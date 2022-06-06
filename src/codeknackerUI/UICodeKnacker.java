@@ -1,6 +1,7 @@
 package codeknackerUI;
 
 import codeknacker.CodeKnackerRandomNumber;
+import codeknacker.CodeKnackerStatus;
 import codeknacker.GameException;
 import codeknackerNetwork.CodeKnackerTCPProtocolEngine;
 import codeknacker.CodeKnackerStream;
@@ -23,6 +24,8 @@ public class UICodeKnacker {
     private TCPStream tcpStream;
     private CodeKnackerTCPProtocolEngine protocolEngine;
     private String partnerName;
+
+    private CodeKnackerStatus status;
 
     public static void main(String[] args) throws Exception {
         System.out.println();
@@ -125,14 +128,25 @@ public class UICodeKnacker {
                         this.getRules();
                         break;
                     case START:
+                        //if(status!=CodeKnackerStatus.CONNECTED){
+                        //    throw new GameException("call start, but wrong status.");
+                        //}
                         try {
                             codeSolution.createThreeUniqueRandomNumbers();
                             for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
                                 System.out.print(codeSolution.getElement(i));
                             }
                             System.out.println();
+                            status = CodeKnackerStatus.START;
+                            System.out.println("Im folgendem Zustand befindet sich das Spiel: " + status);
+                            System.out.println();
                             int playerNumber = com.chooseTheFirstPlayer();
-                            com.createTheUpperPartOfTheGameFrameStart(playerNumber);
+
+                            if(playerNumber == 0){
+                                com.createTheUpperPartOfTheGameFrameStart(playerNumber);
+                            }else{
+                                com.createTheUpperPartOfTheGameFrameStart(playerNumber);
+                            }
                         }catch (GameException e){
                             e.printStackTrace();
                         }
@@ -189,7 +203,8 @@ public class UICodeKnacker {
         System.out.println("It's coming soon.");
         printUsage();
         runCommandLoop();
-        /*if (this.alreadyConnected()) return;
+        /*
+        if (this.alreadyConnected()) return;
 
         String hostname = null;
 

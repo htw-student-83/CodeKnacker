@@ -6,7 +6,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
-    private static int numberOfInputs = 1;
+    private static int numberOfInputsPlayer1 = 1;
+    private static int numberOfInputsPlayer2 = 1;
+
+    private static int numberOfInputs = 0;
     private final static int maxOfNumberOfInputs = 3;
     private int playernumber = 0;
     private final static int theSmallestValidRandomNumber = 0;
@@ -16,7 +19,7 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     CodeKnackerRandomNumber code = new CodeKnackerRandomNumber();
     CodeKnackerDrawFrame frame = new CodeKnackerDrawFrame();
     CodeKnackerPunkte punkte = new CodeKnackerPunkte();
-    CodeKnackerPlayerStatus status = new CodeKnackerPlayerStatus();
+    ChangeStatus status = new ChangeStatus();
 
     @Override
     public void yourHint() throws Exception, NetworkException{
@@ -50,7 +53,6 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
                 throw new GameException("Your input number is outside the intervall.");
             }else{
                 impl.checkHintNumber(userHintNumber, playernumber);
-                incrementPlayernumber();
             }
         }else{
             //Spielende
@@ -102,12 +104,32 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         numberOfInputs = 1;
     }
 
-    public static void incrementNumberOfInputs(){
+    public static void incrementNumberOfInputs() {
         numberOfInputs++;
     }
 
-    public static int getNumberOfInputs(){
-        return numberOfInputs;
+    public static void setNumberOfInputsToOne_Player1(){
+        numberOfInputsPlayer1 = 1;
+    }
+
+    public static void setNumberOfInputsToOne_Player2(){
+        numberOfInputsPlayer2 = 1;
+    }
+
+    public static void incrementNumberOfInputs_Player1(){
+        numberOfInputsPlayer1++;
+    }
+
+    public static void incrementNumberOfInputs_Player2(){
+        numberOfInputsPlayer2++;
+    }
+
+    public static int getNumberOfInputs_player1(){
+        return numberOfInputsPlayer1;
+    }
+
+    public static int getNumberOfInputs_player2(){
+        return numberOfInputsPlayer2;
     }
 
     public static int getMaxOfNumberOfInputs() {
@@ -116,22 +138,15 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
 
     @Override
     public boolean howIsYourNumberTip() throws Exception, NetworkException {
-        if(numberOfInputs<=maxOfNumberOfInputs){
+        if(numberOfInputsPlayer1<=maxOfNumberOfInputs){
+            return true;
+        }else if(numberOfInputsPlayer2<=maxOfNumberOfInputs){
             return true;
         }else{
             //status.setStatus(CodeKnackerStatus.ENDED);
             createTheUpperPartOfTheGameFrameEnd();
             return false;
         }
-    }
-
-
-    private int incrementPlayernumber(){
-        return this.playernumber++;
-    }
-
-    private int decrementPlayernumber(){
-        return this.playernumber--;
     }
 
     /**
@@ -160,40 +175,43 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
             System.err.println("Your input is invalid.");
             askForAsecondRound();
         }else if(input.equals("j")){
-            numberOfInputs = 1;
+            status.setStatus(CodeKnackerStatus.START);
+            numberOfInputsPlayer1 = 1;
+            numberOfInputsPlayer2 = 1;
             punkte.setPunktePlayer1Zero();
+            punkte.setPunktePlayer2Zero();
             code.createThreeUniqueRandomNumbers();
             System.out.println();
             impl.setI();
-            //chooseTheFirstPlayer();
-            createTheUpperPartOfTheGameFrameContinue();
+            int nextFirstPlayer = chooseTheFirstPlayer();
+            createTheUpperPartOfTheGameFrameContinue(nextFirstPlayer);
         }else{
             doExit();
         }
     }
 
     public void createTheUpperPartOfTheGameFrameStart(int playernumber) throws Exception, NetworkException {
+        status.setStatus(CodeKnackerStatus.GAME_IS_ACTIVE);
         CodeKnackerDrawFrame frame = new CodeKnackerDrawFrame();
         System.out.println(frame.createTheUpperGameFrameStart());
         getStoryOfGame();
         //Hier muss bestimmt werden, welcher Spieler zuerst an der Reihe ist
         if(playernumber == 0){
-            //status = CodeKnackerStatus.PLAYER_1;
-            //TODO
+            //Don't repeat yourself!!!
             String spieler = "Spieler1 ist dran.";
             System.out.println();
             int laengeSpielername  = spieler.length();
             System.out.print(spieler);
             createUnderline(laengeSpielername);
             System.out.println();
-            CodeKnackerUserCom.userRequest();
+            CodeKnackerUserCom.userRequest(playernumber);
             System.out.println();
-            //Prüfen, ob diese Variante sinnvoll ist!
             try {
                 yourHint();
             }catch (DoubleNumberException | NegativNumberException | GameException e){
                 System.err.println(e.getLocalizedMessage());
-                CodeKnackerUserCom.userRequest();
+                int nextPlayer = CodeKnackerImpl.incrementPlayerNumber(playernumber);
+                CodeKnackerUserCom.userRequest(nextPlayer);
                 yourHint();
             }
         }else{
@@ -205,64 +223,104 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
             System.out.print(spieler);
             createUnderline(laengeSpielername);
             System.out.println();
-            CodeKnackerUserCom.userRequest();
+            CodeKnackerUserCom.userRequest(playernumber);
             System.out.println();
             //Prüfen, ob diese Variante sinnvoll ist!
             try {
                 yourHint();
             }catch (DoubleNumberException | NegativNumberException | GameException e){
                 System.err.println(e.getLocalizedMessage());
-                CodeKnackerUserCom.userRequest();
+                int nextPlayer = CodeKnackerImpl.decrementPlayerNumber(playernumber);
+                CodeKnackerUserCom.userRequest(nextPlayer);
+                yourHint();
+            }
+        }
+    }
+
+    public void createTheUpperPartOfTheGameFrameContinue(int nextPlayernumber) throws Exception, NetworkException {
+        status.setStatus(CodeKnackerStatus.GAME_IS_ACTIVE);
+        System.out.println(frame.createTheUpperGameFrameContinue());
+        if(nextPlayernumber == 0){
+            String spieler = "Spieler1 ist dran.";
+            System.out.println();
+            int laengeSpielername  = spieler.length();
+            System.out.print(spieler);
+            createUnderline(laengeSpielername);
+            code.createThreeUniqueRandomNumbers();
+            //for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
+            //    System.out.print(code.getElement(i));
+            //}
+            System.out.println();
+            CodeKnackerUserCom.userRequest(playernumber);
+            System.out.println();
+            try {
+                yourHint();
+            }catch (DoubleNumberException | NegativNumberException | GameException e){
+                System.err.println(e);
+                CodeKnackerUserCom.userRequest(playernumber);
+                yourHint();
+            }
+        }else{
+            String spieler = "Spieler2 ist dran.";
+            System.out.println();
+            int laengeSpielername  = spieler.length();
+            System.out.print(spieler);
+            createUnderline(laengeSpielername);
+            code.createThreeUniqueRandomNumbers();
+            //for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
+            //    System.out.print(code.getElement(i));
+            //}
+            System.out.println();
+            CodeKnackerUserCom.userRequest(playernumber);
+            System.out.println();
+            try {
+                yourHint();
+            }catch (DoubleNumberException | NegativNumberException | GameException e){
+                System.err.println(e);
+                CodeKnackerUserCom.userRequest(playernumber);
+                yourHint();
+            }
+        }
+    }
+
+    public void createTheUpperPartOfTheGameFrame(int playernumber) throws Exception, NetworkException {
+        System.out.println(frame.createTheUpperGameFrameContinue());
+        System.out.println();
+        //Hier muss eine Incrementierung/Decrementierung stattfinden und ein
+        //Don't repeat yourself!!!
+        if(playernumber == 0){
+            String spieler = "Spieler1 ist dran.";
+            int laengeSpielername  = spieler.length();
+            System.out.print(spieler);
+            createUnderline(laengeSpielername);
+            System.out.println();
+            CodeKnackerUserCom.userRequest(playernumber);
+            System.out.println();
+            try {
+                yourHint();
+            }catch (DoubleNumberException | NegativNumberException | GameException e){
+                System.err.println(e);
+                CodeKnackerUserCom.userRequest(playernumber);
+                yourHint();
+            }
+        }else{
+            String spieler = "Spieler2 ist dran.";
+            playernumber = 1;
+            int laengeSpielername  = spieler.length();
+            System.out.print(spieler);
+            createUnderline(laengeSpielername);
+            System.out.println();
+            CodeKnackerUserCom.userRequest(playernumber);
+            System.out.println();
+            try {
+                yourHint();
+            }catch (DoubleNumberException | NegativNumberException | GameException e){
+                System.err.println(e);
+                CodeKnackerUserCom.userRequest(playernumber);
                 yourHint();
             }
         }
 
-    }
-
-    public void createTheUpperPartOfTheGameFrameContinue() throws Exception, NetworkException {
-        System.out.println(frame.createTheUpperGameFrameContinue());
-        //Hier muss bestimmt werden, welcher Spieler zuerst an der Reihe ist
-        //chooseTheFristPlayer()
-        String spieler = "Spieler1 ist dran.";
-        System.out.println();
-        int laengeSpielername  = spieler.length();
-        System.out.print(spieler);
-        createUnderline(laengeSpielername);
-        code.createThreeUniqueRandomNumbers();
-        //for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
-        //    System.out.print(code.getElement(i));
-        //}
-        System.out.println();
-        CodeKnackerUserCom.userRequest();
-        System.out.println();
-        try {
-            yourHint();
-        }catch (DoubleNumberException | NegativNumberException | GameException e){
-            System.err.println(e);
-            CodeKnackerUserCom.userRequest();
-            yourHint();
-        }
-    }
-
-    public void createTheUpperPartOfTheGameFrame() throws Exception, NetworkException {
-        System.out.println(frame.createTheUpperGameFrameContinue());
-        System.out.println();
-        //Hier muss eine Incrementierung/Decrementierung stattfinden und ein
-        //Wechsel des Zustandes
-        String spieler = "Spieler1 ist dran.";
-        int laengeSpielername  = spieler.length();
-        System.out.print(spieler);
-        createUnderline(laengeSpielername);
-        System.out.println();
-        CodeKnackerUserCom.userRequest();
-        System.out.println();
-        try {
-            yourHint();
-        }catch (DoubleNumberException | NegativNumberException | GameException e){
-            System.err.println(e);
-            CodeKnackerUserCom.userRequest();
-            yourHint();
-        }
     }
 
     public void getStoryOfGame(){
@@ -286,9 +344,14 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         //this.protocolEngine.close();
     }
 
-    public static void userRequest(){
-        System.out.println("Your " + CodeKnackerUserCom.numberOfInputs +
-                ". hint for the following number at index " + CodeKnackerImpl.index + " is?");
+    public static void userRequest(int playernumber){
+        if(playernumber == 0){
+            System.out.println("Your " + CodeKnackerUserCom.numberOfInputsPlayer1 +
+                    ". hint for the following number at index " + CodeKnackerImpl.index + " is?");
+        }else {
+            System.out.println("Your " + CodeKnackerUserCom.numberOfInputsPlayer2 +
+                    ". hint for the following number at index " + CodeKnackerImpl.index + " is?");
+        }
     }
 
     public void createTheUpperPartOfTheGameFrameEnd() throws Exception, NetworkException {
