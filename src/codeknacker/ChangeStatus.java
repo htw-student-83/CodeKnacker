@@ -1,13 +1,13 @@
 package codeknacker;
 
 public class ChangeStatus {
-    private CodeKnackerStatus aktuellerZustand = null;
+    private static CodeKnackerStatus aktuellerZustand = CodeKnackerStatus.PLAYER1_ACTIVE;
 
-    public CodeKnackerStatus getStatus(){
+    public static CodeKnackerStatus getStatus(){
         return aktuellerZustand;
     }
 
-    public void setStatus(CodeKnackerStatus neuZustand){
-        this.aktuellerZustand = neuZustand;
+    public static void setStatus(CodeKnackerStatus neuZustand){
+        aktuellerZustand = neuZustand;
     }
 }

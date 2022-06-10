@@ -40,7 +40,7 @@ public class InputCheckTest {
         ICodeKnackerCheckUserNumber input = this.implobject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        boolean result =  input.checkHintNumberForTesting(hintNumber1, 1);
+        boolean result =  input.checkHintNumberForTesting(hintNumber1);
         Assertions.assertFalse(result);
     }
 
@@ -51,7 +51,7 @@ public class InputCheckTest {
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         ICodeKnackerPunkte punkte = this.punkteobject();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        boolean result = input.checkHintNumberForTesting(hintNumber1, 1);
+        boolean result = input.checkHintNumberForTesting(hintNumber1);
         int point = punkte.getPunktePlayer1();
         Assertions.assertFalse(result);
         Assertions.assertEquals(0,  point);
@@ -64,7 +64,7 @@ public class InputCheckTest {
         ICodeKnackerPunkte punkte = this.punkteobject();
         ICodeKnackerCheckUserNumber input = this.implobject();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        boolean result = input.checkHintNumberForTesting(hintNumber2, 1);
+        boolean result = input.checkHintNumberForTesting(hintNumber2);
         int point = punkte.getPunktePlayer1();
         Assertions.assertTrue(result);
         Assertions.assertEquals(1, point);
@@ -77,8 +77,8 @@ public class InputCheckTest {
         ICodeKnackerPunkte punkte = this.punkteobject();
         ICodeKnackerCheckUserNumber input = this.implobject();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        boolean result1 = input.checkHintNumberForTesting(hintNumber2, 1);
-        boolean result2 = input.checkHintNumberForTesting(hintNumber3, 1);
+        boolean result1 = input.checkHintNumberForTesting(hintNumber2);
+        boolean result2 = input.checkHintNumberForTesting(hintNumber3);
         int point = punkte.getPunktePlayer1();
         Assertions.assertTrue(result1);
         Assertions.assertTrue(result2);
@@ -91,8 +91,8 @@ public class InputCheckTest {
         ICodeKnackerPunkte punkte = this.punkteobject();
         ICodeKnackerCheckUserNumber input = this.implobject();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        boolean result1 = input.checkHintNumberForTesting(hintNumber1, 1);
-        boolean result2 = input.checkHintNumberForTesting(hintNumber3, 1);
+        boolean result1 = input.checkHintNumberForTesting(hintNumber1);
+        boolean result2 = input.checkHintNumberForTesting(hintNumber3);
         int point = punkte.getPunktePlayer1();
         Assertions.assertFalse(result1);
         Assertions.assertFalse(result2);
@@ -105,7 +105,7 @@ public class InputCheckTest {
         ICodeKnackerCheckUserNumber input = this.implobject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        boolean result = input.checkHintNumberForTesting(hintNumber2, 1);
+        boolean result = input.checkHintNumberForTesting(hintNumber2);
         Assertions.assertTrue(result);
         Assertions.assertEquals(1, CodeKnackerImpl.index);
     }
@@ -116,8 +116,8 @@ public class InputCheckTest {
         ICodeKnackerCheckUserNumber input = this.implobject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         randomNumber.setRandomNumbersInArray(1,2,3);
-        boolean result1 = input.checkHintNumberForTesting(hintNumber2, 1);
-        boolean result2 = input.checkHintNumberForTesting(hintNumber3, 2);
+        boolean result1 = input.checkHintNumberForTesting(hintNumber2);
+        boolean result2 = input.checkHintNumberForTesting(hintNumber3);
         Assertions.assertTrue(result1);
         Assertions.assertTrue(result2);
         Assertions.assertEquals(2, CodeKnackerImpl.index);

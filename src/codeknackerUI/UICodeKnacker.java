@@ -1,23 +1,27 @@
 package codeknackerUI;
 
-import codeknacker.CodeKnackerRandomNumber;
-import codeknacker.CodeKnackerStatus;
-import codeknacker.GameException;
-import codeknackerNetwork.CodeKnackerTCPProtocolEngine;
-import codeknacker.CodeKnackerStream;
-import codeknackerNetwork.TCPStream;
+import codeknacker.*;
+import codeknackerNetwork.*;
+
 import java.io.*;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
 
 public class UICodeKnacker {
     CodeKnackerUserCom com = new CodeKnackerUserCom();
     CodeKnackerRandomNumber codeSolution = new CodeKnackerRandomNumber();
+    private final CodeKnackerImpl gameEngine = null;
     private static final String CONNECT = "c";
     private static final String RulesOfTheGame = "r";
     private static final String START = "s";
     private static final String HISTORY = "h";
     private static final String EXIT = "e";
     private final PrintStream outStream;
+
     private final BufferedReader inBufferedReader;
+
+    private String remoteEngine = "localhost";
+
     private final String playerName;
     //private final CodeKnackerImpl gameEngine;
     //private final TicTacToeLocalBoard localBord;
@@ -27,15 +31,37 @@ public class UICodeKnacker {
 
     private CodeKnackerStatus status;
 
+    public static final int PORTNUMBER = 7070;
+
     public static void main(String[] args) throws Exception {
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        //                                      TCP-Start                                  //
+        /////////////////////////////////////////////////////////////////////////////////////
+
+        DistributedAppImpl distributedApp = new DistributedAppImpl();
+        TCPStream tcpStream;
+
+
+        if(args.length > 0) {
+
+            System.out.println("init as TCP client");
+            tcpStream = new TCPStream(PORTNUMBER, false, "Client", distributedApp);
+        } else {
+            System.out.println("init as TCP server");
+            tcpStream = new TCPStream(PORTNUMBER, true, "Server", distributedApp);
+       }
+
         System.out.println();
         System.out.println("                              Welcome to the CodeKnacker");
         System.out.println("");
+        tcpStream.start();
+        /*
         if (args.length < 1) {
             System.err.println("need playerName as parameter");
             System.exit(1);
         }
-
+*/
         System.out.println("Hey " + args[0] + "-)");
 
         UICodeKnacker userCmd = new UICodeKnacker(args[0], System.out, System.in);
@@ -140,9 +166,9 @@ public class UICodeKnacker {
                             status = CodeKnackerStatus.START;
                             System.out.println("Im folgendem Zustand befindet sich das Spiel: " + status);
                             System.out.println();
-                            int playerNumber = com.chooseTheFirstPlayer();
+                            int playerNumber = com.chooseTheFirstPlayer();//Who player is the first
 
-                            if(playerNumber == 0){
+                            if(playerNumber == 1){
                                 com.createTheUpperPartOfTheGameFrameStart(playerNumber);
                             }else{
                                 com.createTheUpperPartOfTheGameFrameStart(playerNumber);
@@ -191,23 +217,16 @@ public class UICodeKnacker {
     }
 
     private void openHistory() throws Exception {
-        String testString = "test123";
         CodeKnackerStream stream = new CodeKnackerStream();
-        stream.saveGameResult(testString);
         System.out.println("Die letzte Rounde gewann: " + stream.restoreGameResult());
         printUsage();
         runCommandLoop();
     }
 
     private void doConnect(String parameterString) throws Exception {
-        System.out.println("It's coming soon.");
-        printUsage();
-        runCommandLoop();
-        /*
         if (this.alreadyConnected()) return;
 
         String hostname = null;
-
 
         try {
             StringTokenizer st = new StringTokenizer(parameterString);
@@ -219,10 +238,34 @@ public class UICodeKnacker {
             hostname = "localhost";
         }
 
-        this.tcpStream = new TCPStream(TicTacToe.DEFAULT_PORT, false, this.playerName);
+        this.tcpStream = new TCPStream(CodeKnacker.DEFAULT_PORT, false, this.playerName);
         this.tcpStream.setRemoteEngine(hostname);
-        this.tcpStream.setStreamCreationListener(this);
+        this.tcpStream.setStreamCreationListener((TCPStreamCreatedListener) this);
         this.tcpStream.start();
-         */
+    }
+
+    private boolean alreadyConnected() {
+        if (this.tcpStream != null) {
+            System.err.println("connection already established or connection attempt in progress");
+            return true;
+        }
+
+        return false;
+    }
+
+    public void streamCreated(TCPStream stream) {
+        // connection established - setup protocol engine
+        System.out.println("stream created - setup engine - we can play quite soon.");
+        this.protocolEngine = new CodeKnackerTCPProtocolEngine((CodeKnacker) this.gameEngine, this.playerName);
+        this.gameEngine.setProtocolEngine(protocolEngine);
+
+        this.protocolEngine.subscribeGameSessionEstablishedListener((GameSessionEstablishedListener) this);
+
+        try {
+            protocolEngine.handleConnection(stream.getInputStream(), stream.getOutputStream());
+        } catch (IOException e) {
+            System.err.println("cannot get streams from tcpStream - fatal, give up: " + e.getLocalizedMessage());
+            System.exit(1);
+        }
     }
 }

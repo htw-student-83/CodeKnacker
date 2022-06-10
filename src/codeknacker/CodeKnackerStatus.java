@@ -4,7 +4,8 @@ public enum CodeKnackerStatus {
     CONNECTED,
     START,
 
-    GAME_IS_ACTIVE, //min one player is playing
+    PLAYER1_ACTIVE,
 
+    PLAYER2_ACTIVE,
     ENDED
 }
