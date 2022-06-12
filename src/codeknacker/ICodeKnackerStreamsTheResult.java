@@ -11,7 +11,6 @@ public interface ICodeKnackerStreamsTheResult {
      */
     String restoreGameResult() throws IOException;
 
-//Diese Methode
     /**
      * to save the current result of the game into a file
      * @param playerName, the winner of a game round

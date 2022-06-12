@@ -2,7 +2,6 @@ package codeknackerUI;
 
 import codeknacker.*;
 import codeknackerNetwork.*;
-
 import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
@@ -17,51 +16,47 @@ public class UICodeKnacker {
     private static final String HISTORY = "h";
     private static final String EXIT = "e";
     private final PrintStream outStream;
-
     private final BufferedReader inBufferedReader;
 
     private String remoteEngine = "localhost";
 
     private final String playerName;
-    //private final CodeKnackerImpl gameEngine;
-    //private final TicTacToeLocalBoard localBord;
     private TCPStream tcpStream;
-    private CodeKnackerTCPProtocolEngine protocolEngine;
     private String partnerName;
-
     private CodeKnackerStatus status;
 
     public static final int PORTNUMBER = 7070;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception, NetworkException {
 
         /////////////////////////////////////////////////////////////////////////////////////
         //                                      TCP-Start                                  //
         /////////////////////////////////////////////////////////////////////////////////////
 
-        DistributedAppImpl distributedApp = new DistributedAppImpl();
+        //Diese Klasse kümmert sich um locale Eingaben
+        DistributedCodeKnackerImpl distributedApp = new DistributedCodeKnackerImpl();
         TCPStream tcpStream;
 
-
         if(args.length > 0) {
-
             System.out.println("init as TCP client");
             tcpStream = new TCPStream(PORTNUMBER, false, "Client", distributedApp);
         } else {
             System.out.println("init as TCP server");
             tcpStream = new TCPStream(PORTNUMBER, true, "Server", distributedApp);
-       }
+        }
 
         System.out.println();
         System.out.println("                              Welcome to the CodeKnacker");
-        System.out.println("");
+        System.out.println();
+
         tcpStream.start();
+
         /*
         if (args.length < 1) {
             System.err.println("need playerName as parameter");
             System.exit(1);
         }
-*/
+        */
         System.out.println("Hey " + args[0] + "-)");
 
         UICodeKnacker userCmd = new UICodeKnacker(args[0], System.out, System.in);
@@ -82,7 +77,7 @@ public class UICodeKnacker {
          */
     }
 
-    public UICodeKnacker(String playerName, PrintStream os, InputStream is) throws Exception {
+    public UICodeKnacker(String playerName, PrintStream os, InputStream is) {
         this.playerName = playerName;
         this.outStream = os;
         this.inBufferedReader = new BufferedReader(new InputStreamReader(is));
@@ -169,7 +164,7 @@ public class UICodeKnacker {
                             int playerNumber = com.chooseTheFirstPlayer();//Who player is the first
 
                             if(playerNumber == 1){
-                                com.createTheUpperPartOfTheGameFrameStart(playerNumber);
+                                 com.createTheUpperPartOfTheGameFrameStart(playerNumber);
                             }else{
                                 com.createTheUpperPartOfTheGameFrameStart(playerNumber);
                             }
@@ -223,7 +218,7 @@ public class UICodeKnacker {
         runCommandLoop();
     }
 
-    private void doConnect(String parameterString) throws Exception {
+    private void doConnect(String parameterString) {
         if (this.alreadyConnected()) return;
 
         String hostname = null;
@@ -256,10 +251,10 @@ public class UICodeKnacker {
     public void streamCreated(TCPStream stream) {
         // connection established - setup protocol engine
         System.out.println("stream created - setup engine - we can play quite soon.");
-        this.protocolEngine = new CodeKnackerTCPProtocolEngine((CodeKnacker) this.gameEngine, this.playerName);
+        CodeKnackerTCPProtocolEngine protocolEngine = new CodeKnackerTCPProtocolEngine((CodeKnacker) this.gameEngine, this.playerName);
         this.gameEngine.setProtocolEngine(protocolEngine);
 
-        this.protocolEngine.subscribeGameSessionEstablishedListener((GameSessionEstablishedListener) this);
+        protocolEngine.subscribeGameSessionEstablishedListener((GameSessionEstablishedListener) this);
 
         try {
             protocolEngine.handleConnection(stream.getInputStream(), stream.getOutputStream());

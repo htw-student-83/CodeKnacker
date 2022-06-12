@@ -36,7 +36,7 @@ public class InputCheckTest {
 
 
     @Test
-    void theInputNumberIsWrong() throws Exception, NetworkException {
+    public void theInputNumberIsWrong() throws Exception, NetworkException {
         ICodeKnackerCheckUserNumber input = this.implobject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         randomNumber.setRandomNumbersInArray(1,2,3);
@@ -46,7 +46,7 @@ public class InputCheckTest {
 
 
     @Test
-    void theInputNumberIsWrongWithNoPoint() throws Exception, NetworkException {
+    public void theInputNumberIsWrongWithNoPoint() throws Exception, NetworkException {
         ICodeKnackerCheckUserNumber input = this.implobject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         ICodeKnackerPunkte punkte = this.punkteobject();
@@ -59,7 +59,7 @@ public class InputCheckTest {
 
 
     @Test
-    void oneNumberIsFoundWithGettingPoint() throws Exception, NetworkException {
+    public void oneNumberIsFoundWithGettingPoint() throws Exception, NetworkException {
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         ICodeKnackerPunkte punkte = this.punkteobject();
         ICodeKnackerCheckUserNumber input = this.implobject();
@@ -72,7 +72,7 @@ public class InputCheckTest {
 
 
     @Test
-    void twoInputNumbersAreRightWithGettingPoints() throws Exception, NetworkException {
+    public void twoInputNumbersAreRightWithGettingPoints() throws Exception, NetworkException {
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         ICodeKnackerPunkte punkte = this.punkteobject();
         ICodeKnackerCheckUserNumber input = this.implobject();
@@ -86,7 +86,7 @@ public class InputCheckTest {
     }
 
     @Test
-    void twoInputNumbersAreWrongWithNoPoints() throws Exception, NetworkException {
+    public void twoInputNumbersAreWrongWithNoPoints() throws Exception, NetworkException {
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         ICodeKnackerPunkte punkte = this.punkteobject();
         ICodeKnackerCheckUserNumber input = this.implobject();
@@ -101,7 +101,7 @@ public class InputCheckTest {
 
 
     @Test
-    void firstNumberIsFoundWithoutWin() throws Exception, NetworkException {
+    public void firstNumberIsFoundWithoutWin() throws Exception, NetworkException {
         ICodeKnackerCheckUserNumber input = this.implobject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         randomNumber.setRandomNumbersInArray(1,2,3);
@@ -112,7 +112,7 @@ public class InputCheckTest {
 
 
     @Test
-    void secondNumberIsFoundWithoutWin() throws Exception, NetworkException {
+    public void secondNumberIsFoundWithoutWin() throws Exception, NetworkException {
         ICodeKnackerCheckUserNumber input = this.implobject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         randomNumber.setRandomNumbersInArray(1,2,3);

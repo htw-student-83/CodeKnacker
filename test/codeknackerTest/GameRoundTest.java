@@ -1,7 +1,6 @@
 package codeknackerTest;
 
 import codeknacker.*;
-import codeknackerUI.NetworkException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -27,20 +26,18 @@ public class GameRoundTest {
 
     @BeforeEach
     public void changeToInitialValues(){
-        CodeKnackerImpl.setI();
         CodeKnackerPunkte initialPunkte = new CodeKnackerPunkte();
+        CodeKnackerImpl.setI();
         initialPunkte.setPunktePlayer1Zero();
         initialPunkte.setPunktePlayer2Zero();
     }
 
-    //Jeder Spieler hat 3 Versuche
     @Test
-    public void aWinnerTest() throws Exception, NetworkException {
+    public void aWinnerTest() throws Exception{
         ICodeKnackerStreamsTheResult stream = this.resultStreamObject();
         ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         ICodeKnackerPunkte punkte = new CodeKnackerPunkte();
-
         randomNumber.setRandomNumbersInArray(4,5,6);
 
         //Zahl X
@@ -67,7 +64,7 @@ public class GameRoundTest {
 
 
     @Test
-    public void aWinnerTest2() throws Exception, NetworkException {
+    public void aWinnerTest2() throws Exception {
         ICodeKnackerStreamsTheResult stream = this.resultStreamObject();
         ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
@@ -96,7 +93,7 @@ public class GameRoundTest {
     }
 
     @Test
-    public void theBestRoundForOnePlayerTest() throws Exception, NetworkException {
+    public void theBestRoundForOnePlayerTest() throws Exception {
         ICodeKnackerStreamsTheResult stream = this.resultStreamObject();
         ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
@@ -122,7 +119,6 @@ public class GameRoundTest {
         checkInput.checkHintNumberForTesting2(3,CodeKnackerStatus.PLAYER1_ACTIVE);
         checkInput.checkHintNumberForTesting2(6,CodeKnackerStatus.PLAYER2_ACTIVE);
 
-        //How does simulate that two players are playing?
         String resultWinner = stream.restoreGameResult();
         int points_player2 = punkte.getPunktePlayer2();
         Assertions.assertEquals(3, points_player2);
@@ -130,7 +126,7 @@ public class GameRoundTest {
     }
 
     @Test
-    public void aRemiTest() throws Exception, NetworkException {
+    public void aRemiTest() throws Exception {
         ICodeKnackerStreamsTheResult stream = this.resultStreamObject();
         ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
@@ -165,10 +161,10 @@ public class GameRoundTest {
     }
 
     @Test
-    public void continueTest() throws Exception, NetworkException {
+    public void continueTest() throws Exception{
         ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
-        //herer to simulate a game round with a remi at the end
+
         randomNumber.setRandomNumbersInArray(4,5,6);
 
         //Zahl X
@@ -180,8 +176,9 @@ public class GameRoundTest {
         Assertions.assertNotSame(ChangeStatus.getStatus(), CodeKnackerStatus.ENDED);
     }
 
+    /*
     @Test(expected = WrongStatusException.class)
-    public void aGameRoundWithAStatusFaild() throws Exception, NetworkException {
+    public void aGameRoundWithAStatusFaild() throws Exception {
         ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         randomNumber.setRandomNumbersInArray(4,5,6);
@@ -192,7 +189,7 @@ public class GameRoundTest {
     }
 
     @Test(expected = WrongStatusException.class)
-    public void aGameRoundWithAStatusFaild2() throws Exception, NetworkException {
+    public void aGameRoundWithAStatusFaild2() throws Exception{
         ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
         ICodeKnackerRandomNumbers randomNumber = this.randomNumberobject();
         randomNumber.setRandomNumbersInArray(4,5,6);
@@ -201,4 +198,6 @@ public class GameRoundTest {
         checkInput.checkHintNumberForTesting2(2, CodeKnackerStatus.PLAYER2_ACTIVE);
         checkInput.checkHintNumberForTesting2(1, CodeKnackerStatus.PLAYER2_ACTIVE);
     }
+
+     */
 }

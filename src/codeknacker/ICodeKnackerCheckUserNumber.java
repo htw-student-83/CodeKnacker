@@ -28,11 +28,18 @@ public interface ICodeKnackerCheckUserNumber {
 
     /**
      *
-     * @param number
-     * @param status
-     * @return
-     * @throws NetworkException
-     * @throws Exception
+     * @param number, hintnumber
+     * @param status, the current status of the game
+     * @return true, if one search number is found, otherwise false
+     * @throws Exception, if when something else if wrong
      */
-    boolean checkHintNumberForTesting2(int number, CodeKnackerStatus status) throws NetworkException, Exception;
+    boolean checkHintNumberForTesting2(int number, CodeKnackerStatus status) throws Exception;
+
+
+    /**
+     * check, who is the winner of the current round
+     * if both player have the same points, we have a remi
+     * @return the result after a round
+     */
+    String won()throws IOException;
 }

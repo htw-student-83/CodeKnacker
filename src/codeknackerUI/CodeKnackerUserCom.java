@@ -16,12 +16,10 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     CodeKnackerRandomNumber code = new CodeKnackerRandomNumber();
     CodeKnackerDrawFrame frame = new CodeKnackerDrawFrame();
     CodeKnackerPunkte punkte = new CodeKnackerPunkte();
-    ChangeStatus status = new ChangeStatus();
 
     @Override
     public void yourHint() throws Exception, NetworkException{
         CodeKnackerImpl impl = new CodeKnackerImpl();
-        //status.setStatus(CodeKnackerStatus.PLAYER_1);
         boolean userIsReady = howIsYourNumberTip();
         if(userIsReady) {
             Scanner inputUser = new Scanner(System.in);
@@ -32,10 +30,6 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
             if (!inputUser.hasNextInt()){
                 throw new GameException("Your input was not a positive number incl. zero.");
             }
-
-            //if(!Character.isDigit(Integer.parseInt(userinput))){
-            //     throw new GameException("Your input is invalid.");
-            //}
 
             String inputUserString = inputUser.next();
             int userHintNumber = Integer.parseInt(inputUserString);
@@ -153,41 +147,12 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         return randomNumber;
     }
 
-    @Override
-    public void askForAsecondRound() throws Exception, NetworkException {
-        CodeKnackerUserCom com = new CodeKnackerUserCom();
-        System.out.println("Do you want to start a new round?");
-        System.out.println("(j)");
-        System.out.println("(n)");
-        Scanner inputUser = new Scanner(System.in);
-        String input = inputUser.next();
-        if(!input.equals("j") && !input.equals("n")){
-            System.err.println("Your input is invalid.");
-            askForAsecondRound();
-        }else if(input.equals("j")){
-            setAllValuesToInitial();
-            code.createThreeUniqueRandomNumbers();
-            for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
-                System.out.print(code.getElement(i));
-            }
-            if(ChangeStatus.getStatus()==CodeKnackerStatus.PLAYER1_ACTIVE){
-                ChangeStatus.setStatus(CodeKnackerStatus.PLAYER2_ACTIVE);
-            }else{
-                ChangeStatus.setStatus(CodeKnackerStatus.PLAYER1_ACTIVE);
-            }
-            System.out.println();
-            int playernumber = chooseTheFirstPlayer();
-            com.createTheUpperPartOfTheGameFrameStart(playernumber);
-        }else{
-            doExit();
-        }
-    }
+
 
     public void createTheUpperPartOfTheGameFrameStart(int playernumber) throws Exception, NetworkException {
         CodeKnackerDrawFrame frame = new CodeKnackerDrawFrame();
         System.out.println(frame.createTheUpperGameFrameStart());
         getStoryOfGame();
-        //Hier muss bestimmt werden, welcher Spieler zuerst an der Reihe ist
         if(playernumber == 1){
             ChangeStatus.setStatus(CodeKnackerStatus.PLAYER1_ACTIVE);
             //Don't repeat yourself!!!
@@ -209,7 +174,6 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         }
         if(playernumber == 2){
             ChangeStatus.setStatus(CodeKnackerStatus.PLAYER2_ACTIVE);
-            //TODO
             String spieler = "Spieler2 ist dran.";
             System.out.println();
             int laengeSpielername  = spieler.length();
@@ -218,7 +182,6 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
             System.out.println();
             CodeKnackerUserCom.userRequest();
             System.out.println();
-            //Prüfen, ob diese Variante sinnvoll ist!
             try {
                 yourHint();
             }catch (DoubleNumberException | NegativNumberException | GameException e){
@@ -278,7 +241,6 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
     public void createTheUpperPartOfTheGameFrame() throws Exception, NetworkException {
         System.out.println(frame.createTheUpperGameFrameContinue());
         System.out.println();
-        //Hier muss eine Incrementierung/Decrementierung stattfinden und ein
         //Don't repeat yourself!!!
         if(ChangeStatus.getStatus() == CodeKnackerStatus.PLAYER1_ACTIVE){
             String spieler = "Spieler1 ist dran.";
@@ -361,22 +323,53 @@ public class CodeKnackerUserCom implements ICodeKnackerUserCommunication {
         askForAsecondRound();
     }
 
-    public void createTheUpperPartOfTheGameFrameEndForTesting() throws Exception, NetworkException {
+    public void createTheUpperPartOfTheGameFrameEndForTesting() throws Exception {
         CodeKnackerImpl result = new CodeKnackerImpl();
         result.won();
     }
 
-    public static void createTheDownPartOfTheGameFrame(int lFrame) throws IOException {
+    public static void createTheDownPartOfTheGameFrame(int lFrame) {
         for (int i = 0; i<lFrame; i++){
           System.out.print("#");
         }
     }
 
-    private void setAllValuesToInitial(){
+    public void setAllValuesToInitial(){
         setNumberOfInputsToOne_Player1();
         setNumberOfInputsToOne_Player2();
         punkte.setPunktePlayer1Zero();
         punkte.setPunktePlayer2Zero();
         CodeKnackerImpl.setI();
+    }
+
+
+    public void askForAsecondRound() throws Exception, NetworkException {
+        CodeKnackerUserCom com = new CodeKnackerUserCom();
+        System.out.println("Do you want to start a new round?");
+        System.out.println("(j)");
+        System.out.println("(n)");
+        Scanner inputUser = new Scanner(System.in);
+        String input = inputUser.next();
+        if(!input.equals("j") && !input.equals("n")){
+            System.err.println("Your input is invalid.");
+            askForAsecondRound();
+        }else if(input.equals("j")){
+            com.setAllValuesToInitial();
+            CodeKnackerRandomNumber randomcode = new CodeKnackerRandomNumber();
+            randomcode.createThreeUniqueRandomNumbers();
+            System.out.println();
+            for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
+                System.out.print(randomcode.getElement(i));
+            }
+            if(ChangeStatus.getStatus()==CodeKnackerStatus.PLAYER1_ACTIVE){
+                ChangeStatus.setStatus(CodeKnackerStatus.PLAYER2_ACTIVE);
+                com.createTheUpperPartOfTheGameFrameContinue();
+            }else{
+                ChangeStatus.setStatus(CodeKnackerStatus.PLAYER1_ACTIVE);
+                com.createTheUpperPartOfTheGameFrameContinue();
+            }
+        }else{
+            com.doExit();
+        }
     }
 }
