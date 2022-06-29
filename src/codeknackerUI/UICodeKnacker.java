@@ -10,7 +10,6 @@ public class UICodeKnacker {
     CodeKnackerUserCom com = new CodeKnackerUserCom();
     CodeKnackerRandomNumber codeSolution = new CodeKnackerRandomNumber();
     private final CodeKnackerImpl gameEngine = null;
-    private static final String CONNECT = "c";
     private static final String RulesOfTheGame = "r";
     private static final String START = "s";
     private static final String HISTORY = "h";
@@ -27,7 +26,7 @@ public class UICodeKnacker {
 
     public static final int PORTNUMBER = 7070;
 
-    public static void main(String[] args) throws Exception, NetworkException {
+    public static void main(String[] args) throws Exception {
 
         /////////////////////////////////////////////////////////////////////////////////////
         //                                      TCP-Start                                  //
@@ -57,7 +56,6 @@ public class UICodeKnacker {
             System.exit(1);
         }
         */
-        System.out.println("Hey " + args[0] + "-)");
 
         UICodeKnacker userCmd = new UICodeKnacker(args[0], System.out, System.in);
 
@@ -95,9 +93,6 @@ public class UICodeKnacker {
         b.append("\n");
         b.append(RulesOfTheGame);
         b.append("...to get the game' rules");
-        b.append("\n");
-        b.append(CONNECT);
-        b.append("...to get in contact with an other player");
         b.append("\n");
         b.append(START);
         b.append("...let's start the game");
@@ -142,9 +137,6 @@ public class UICodeKnacker {
 
                 // start command loop
                 switch (commandString) {
-                    case CONNECT:
-                        this.doConnect(parameterString);
-                        break;
                     case RulesOfTheGame:
                         this.getRules();
                         break;
@@ -154,12 +146,11 @@ public class UICodeKnacker {
                         //}
                         try {
                             codeSolution.createThreeUniqueRandomNumbers();
-                            for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
-                                System.out.print(codeSolution.getElement(i));
-                            }
+                            //for(int i = 0; i<CodeKnackerRandomNumber.code.length; i++){
+                            //    System.out.print(codeSolution.getElement(i));
+                            //}
                             System.out.println();
                             status = CodeKnackerStatus.START;
-                            System.out.println("Im folgendem Zustand befindet sich das Spiel: " + status);
                             System.out.println();
                             int playerNumber = com.chooseTheFirstPlayer();//Who player is the first
 
@@ -221,7 +212,7 @@ public class UICodeKnacker {
     private void doConnect(String parameterString) {
         if (this.alreadyConnected()) return;
 
-        String hostname = null;
+        String hostname = "loclhost";
 
         try {
             StringTokenizer st = new StringTokenizer(parameterString);

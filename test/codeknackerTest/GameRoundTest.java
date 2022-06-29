@@ -176,7 +176,7 @@ public class GameRoundTest {
         Assertions.assertNotSame(ChangeStatus.getStatus(), CodeKnackerStatus.ENDED);
     }
 
-    /*
+
     @Test(expected = WrongStatusException.class)
     public void aGameRoundWithAStatusFaild() throws Exception {
         ICodeKnackerCheckUserNumber checkInput = this.checkUserNumberObject();
@@ -198,6 +198,4 @@ public class GameRoundTest {
         checkInput.checkHintNumberForTesting2(2, CodeKnackerStatus.PLAYER2_ACTIVE);
         checkInput.checkHintNumberForTesting2(1, CodeKnackerStatus.PLAYER2_ACTIVE);
     }
-
-     */
 }

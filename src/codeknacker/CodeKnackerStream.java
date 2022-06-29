@@ -6,10 +6,14 @@ import java.nio.file.Paths;
 
 public class CodeKnackerStream implements ICodeKnackerStreamsTheResult {
 
+    private InputStream is;
+    private OutputStream os;
+
     @Override
     public String restoreGameResult() throws IOException {
         InputStream is = Files.newInputStream(Paths.get("gameresult.txt"));
         String result = "";
+
         /*
         try {
             is =
@@ -17,15 +21,26 @@ public class CodeKnackerStream implements ICodeKnackerStreamsTheResult {
             System.err.println("File can't be opened right now." + e.getMessage());
             System.exit(0);
         }
-
          */
+
         try (DataInputStream dais = new DataInputStream(is)) {
             result = dais.readUTF();
+            sendMessage(result);
         } catch (IOException ex) {
             System.err.println("Something was wrong." + ex.getMessage());
             System.exit(0);
         }
         return result;
+    }
+
+
+    public void sendMessage(String message) throws IOException {
+        DataOutputStream das = new DataOutputStream(os);
+        try {
+            das.writeUTF(message);
+        } catch (IOException e) {
+            System.err.println("fatal: cannot send message: " + e.getLocalizedMessage());
+        }
     }
 
     @Override
